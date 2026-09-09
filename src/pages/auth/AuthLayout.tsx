@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useSearchParams } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
 import { ROLE_THEMES } from "../../config/roleThemes";
 import type { UserRole } from "../../types/auth";
+
+const VALID_ROLES: UserRole[] = ["PATIENT", "DOCTOR", "PHARMACIST", "ADMIN"];
 
 const FEATURES = [
   "HIPAA-compliant data encryption",
@@ -12,7 +14,11 @@ const FEATURES = [
 ];
 
 export default function AuthLayout() {
-  const [activeRole, setActiveRole] = useState<UserRole>("PATIENT");
+  const [searchParams] = useSearchParams();
+  const [activeRole, setActiveRole] = useState<UserRole>(() => {
+    const param = searchParams.get("role") as UserRole | null;
+    return param && VALID_ROLES.includes(param) ? param : "PATIENT";
+  });
   const theme = ROLE_THEMES[activeRole];
 
   return (

@@ -3,6 +3,7 @@ import { useAuth } from "./context/useAuth";
 import AuthLayout from "./pages/auth/AuthLayout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import PatientLandingPage from "./pages/patient/PatientLandingPage";
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -37,6 +38,8 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <Routes>
+      <Route path="/" element={<PatientLandingPage />} />
+
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
