@@ -4,6 +4,7 @@ import AuthLayout from "./pages/auth/AuthLayout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import PatientLandingPage from "./pages/patient/PatientLandingPage";
+import BookingPage from "./pages/patient/BookingPage";
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -39,6 +40,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<PatientLandingPage />} />
+      <Route path="/patient/booking" element={<BookingPage />} />
 
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />

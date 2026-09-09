@@ -6,8 +6,8 @@ import {
   Droplets,
   FileText,
   HeartPulse,
-  Mic,
   Microscope,
+  MousePointerClick,
   QrCode,
   ScanLine,
   Star,
@@ -106,24 +106,48 @@ export interface WorkflowStep {
 
 export const WORKFLOW_STEPS: WorkflowStep[] = [
   {
-    title: "Smart Symptom Triage",
+    title: "Choose or Describe",
     description:
-      "Speak or type your symptoms. The AI maps them against clinical guidelines to suggest a department and assign a triage priority.",
-    icon: Mic,
+      "Pick your specialist or let our assistant identify the right department from your symptoms.",
+    icon: MousePointerClick,
   },
   {
-    title: "Instant Booking & Digital Pass",
+    title: "Instant Booking Pass",
     description:
-      "Choose your preferred physician and receive an immediate confirmation with a VietQR digital check-in pass on your phone.",
+      "Receive a clear SMS and QR code confirmation with your exact appointment window.",
     icon: QrCode,
   },
   {
-    title: "5-Second Kiosk Check-in",
+    title: "5-Second Express Check-in",
     description:
-      "Scan the QR code at any clinic kiosk and receive a live queue ticket instantly - no reception lines, no paperwork.",
+      "Walk into our clinic, tap your QR code at the entrance kiosk, and head straight to your consultation room.",
     icon: ScanLine,
   },
 ];
+
+export interface ClinicImage {
+  url: string;
+  alt: string;
+  aspect: string;
+}
+
+export const HERO_CONSULTATION_IMAGE: ClinicImage = {
+  url: "https://images.squarespace-cdn.com/content/v1/638de650c7378132a12e7c95/44b144e6-000e-4683-ad81-67a3aaf73089/TR4-5-min.jpg",
+  alt: "A warm, reassuring conversation between a senior doctor and a patient at the clinic.",
+  aspect: "aspect-[4/3]",
+};
+
+export const CLINIC_FACILITY_IMAGE: ClinicImage = {
+  url: "https://www.albanyclinic.ca/wp-content/uploads/2024/10/albany-medical-clinic-walk-in-clinic.jpg",
+  alt: "Modern, clean and sterile medical facility with a walk-in reception area.",
+  aspect: "aspect-[16/10]",
+};
+
+export const MEDICAL_TEAM_IMAGE: ClinicImage = {
+  url: "https://irp.cdn-website.com/c7e47148/dms3rep/multi/opt/About-Us-Allergies-First-640w.jpg",
+  alt: "Dedicated specialist team reviewing patient diagnostic results together.",
+  aspect: "aspect-[4/3]",
+};
 
 export interface TransitNote {
   icon: LucideIcon;

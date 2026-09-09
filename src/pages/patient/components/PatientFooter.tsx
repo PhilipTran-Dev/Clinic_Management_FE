@@ -4,7 +4,8 @@ import { CLINIC_SERVICES } from "../data/clinicContent";
 
 const QUICK_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "How AI Works", href: "#how-ai-works" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Doctors", href: "#specialists" },
   { label: "Locations", href: "#locations" },
   { label: "Appointments & Pricing", href: "#faq" },
 ];

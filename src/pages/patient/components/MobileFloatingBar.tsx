@@ -13,8 +13,8 @@ export default function MobileFloatingBar() {
           <Phone className="h-5 w-5" />
         </a>
         <Link
-          to="/login?role=PATIENT"
-          className="flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-cta text-sm font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
+          to="/patient/booking"
+          className="flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-cta text-base font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
         >
           <Calendar className="h-4 w-4" />
           Book Appointment

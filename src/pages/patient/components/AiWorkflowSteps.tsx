@@ -2,18 +2,18 @@ import { WORKFLOW_STEPS } from "../data/clinicContent";
 
 export default function AiWorkflowSteps() {
   return (
-    <section id="how-ai-works" className="scroll-mt-24 bg-white py-16 lg:py-24">
+    <section id="how-it-works" className="scroll-mt-24 bg-white py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            How AI Works
+            A Simple 3-Step Visit
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            From Symptom to Seat in Three Steps
+            From Booking to Consultation in Three Steps
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-500">
-            A fully digital patient journey designed to remove waiting-room noise
-            and paperwork.
+            No paperwork and no confusing portals - just clear steps anyone can
+            follow.
           </p>
         </div>
 

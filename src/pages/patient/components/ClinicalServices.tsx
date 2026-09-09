@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ChevronRight, Clock } from "lucide-react";
 import { CLINIC_SERVICES } from "../data/clinicContent";
 
@@ -39,13 +40,13 @@ export default function ClinicalServices() {
                   <Clock className="mr-1.5 h-3.5 w-3.5 text-slate-400" />
                   {service.duration}
                 </span>
-                <a
-                  href="#book"
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-clinical-600 transition-colors hover:text-clinical-700"
+                <Link
+                  to="/patient/booking"
+                  className="mt-4 inline-flex items-center gap-1 text-base font-medium text-clinical-600 transition-colors hover:text-clinical-700"
                 >
                   Book Service
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </a>
+                </Link>
               </div>
             );
           })}

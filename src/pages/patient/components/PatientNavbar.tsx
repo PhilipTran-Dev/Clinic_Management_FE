@@ -3,10 +3,9 @@ import { Activity, ChevronDown, Clock, MapPin, PhoneCall } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "How AI Works", href: "#how-ai-works" },
-  { label: "Doctors", href: "#services" },
+  { label: "How It Works", href: "#how-it-works" },
+  { label: "Doctors", href: "#specialists" },
   { label: "Locations", href: "#locations" },
-  { label: "Pricing & Insurance", href: "#faq" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -72,12 +71,12 @@ export default function PatientNavbar() {
             >
               Patient Portal Login
             </Link>
-            <a
-              href="#book"
-              className="inline-flex h-10 items-center justify-center rounded-lg bg-cta px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
+            <Link
+              to="/patient/booking"
+              className="inline-flex h-11 items-center justify-center rounded-lg bg-cta px-5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
             >
               Book Appointment
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
