@@ -1,0 +1,68 @@
+export type UserRole = "PATIENT" | "DOCTOR" | "PHARMACIST" | "ADMIN";
+
+export type Gender = "MALE" | "FEMALE" | "OTHER";
+
+export interface User {
+  id: string;
+  email: string;
+  fullName: string;
+  role: UserRole;
+  token?: string;
+  phone?: string;
+  avatarUrl?: string;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  fullName: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
+  role: UserRole;
+  dateOfBirth?: string;
+  gender?: Gender;
+}
+
+export interface DemoAccount {
+  label: string;
+  role: UserRole;
+  email: string;
+  password: string;
+  redirectPath: string;
+}
+
+export const DEMO_ACCOUNTS: DemoAccount[] = [
+  {
+    label: "Patient",
+    role: "PATIENT",
+    email: "patient@demo.clinic",
+    password: "Demo@1234",
+    redirectPath: "/patient/dashboard",
+  },
+  {
+    label: "Doctor",
+    role: "DOCTOR",
+    email: "doctor@demo.clinic",
+    password: "Demo@1234",
+    redirectPath: "/doctor/ehr",
+  },
+  {
+    label: "Pharmacist",
+    role: "PHARMACIST",
+    email: "pharmacist@demo.clinic",
+    password: "Demo@1234",
+    redirectPath: "/pharmacy/queue",
+  },
+  {
+    label: "Admin",
+    role: "ADMIN",
+    email: "admin@demo.clinic",
+    password: "Demo@1234",
+    redirectPath: "/admin/overview",
+  },
+];
