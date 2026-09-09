@@ -2,7 +2,7 @@ import PatientNavbar from "./components/PatientNavbar";
 import HeroSection from "./components/HeroSection";
 import TrustMetrics from "./components/TrustMetrics";
 import ClinicalServices from "./components/ClinicalServices";
-import MedicalSpecialists from "./components/MedicalSpecialists";
+import MedicalStaffSection from "./components/MedicalStaffSection";
 import AiWorkflowSteps from "./components/AiWorkflowSteps";
 import ClinicLocations from "./components/ClinicLocations";
 import ClinicFacility from "./components/ClinicFacility";
@@ -18,7 +18,7 @@ export default function PatientLandingPage() {
         <HeroSection />
         <TrustMetrics />
         <ClinicalServices />
-        <MedicalSpecialists />
+        <MedicalStaffSection />
         <AiWorkflowSteps />
         <ClinicLocations />
         <ClinicFacility />

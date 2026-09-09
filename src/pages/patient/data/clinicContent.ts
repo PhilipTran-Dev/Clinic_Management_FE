@@ -143,11 +143,188 @@ export const CLINIC_FACILITY_IMAGE: ClinicImage = {
   aspect: "aspect-[16/10]",
 };
 
-export const MEDICAL_TEAM_IMAGE: ClinicImage = {
-  url: "https://irp.cdn-website.com/c7e47148/dms3rep/multi/opt/About-Us-Allergies-First-640w.jpg",
-  alt: "Dedicated specialist team reviewing patient diagnostic results together.",
-  aspect: "aspect-[4/3]",
-};
+export interface StaffMember {
+  id: string;
+  name: string;
+  role: "DOCTOR" | "NURSE";
+  title: string;
+  age: number;
+  department: string;
+  specialty: string;
+  experienceYears: number;
+  qualifications: string[];
+  languages: string[];
+  email: string;
+  phone: string;
+  extension: string;
+  roomNumber: string;
+  imageUrl: string;
+  availableToday: boolean;
+  bio: string;
+}
+
+export const MEDICAL_STAFF: StaffMember[] = [
+  {
+    id: "marcus-vance",
+    name: "Dr. Marcus Vance",
+    role: "DOCTOR",
+    title: "Senior Consultant, Allergy & Immunology",
+    age: 48,
+    department: "Allergy & Clinical Immunology",
+    specialty: "Adult Anaphylaxis & Desensitization",
+    experienceYears: 18,
+    qualifications: ["MD", "FRACP"],
+    languages: ["English", "French"],
+    email: "dr.marcus.vance@smartclinic.com",
+    phone: "+84 (028) 3900 1201",
+    extension: "Ext. 201",
+    roomNumber: "Suite 201 (Level 2)",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBr682FWZs0BV7dL-JcrfD6AXLDzubmbjCQ4XEHJjcWhYDGbCtYEL8-os&s=10",
+    availableToday: true,
+    bio: "Senior Consultant specializing in complex allergen immunotherapy, patch testing, and respiratory immunology.",
+  },
+  {
+    id: "muzammil-ahmed",
+    name: "Dr. Muzammil Ahmed",
+    role: "DOCTOR",
+    title: "Consultant Physician, Internal Medicine",
+    age: 42,
+    department: "General Internal Medicine",
+    specialty: "Preventive Medicine & Diagnostic Triage",
+    experienceYears: 14,
+    qualifications: ["MBBS", "MD"],
+    languages: ["English", "Hindi", "Urdu"],
+    email: "dr.ahmed.muzammil@smartclinic.com",
+    phone: "+84 (028) 3900 1104",
+    extension: "Ext. 104",
+    roomNumber: "Suite 104 (Level 1)",
+    imageUrl:
+      "https://content.jdmagicbox.com/v2/comp/hyderabad/m7/040pxx40.xx40.221119220243.t2m7/catalogue/health-care-clinic-dr-muzammil-ahmed-santosh-nagar-hyderabad-clinics-q70ci2fawq.jpg",
+    availableToday: true,
+    bio: "Board-certified physician dedicated to outpatient diagnostic triage, chronic disorder stabilization, and metabolic care.",
+  },
+  {
+    id: "elena-rostova",
+    name: "Dr. Elena Rostova",
+    role: "DOCTOR",
+    title: "Consultant ENT Surgeon",
+    age: 45,
+    department: "Ear, Nose & Throat (ENT)",
+    specialty: "Rhinology, Sinus Surgery & Airway Care",
+    experienceYears: 16,
+    qualifications: ["MD", "PhD"],
+    languages: ["English", "Russian"],
+    email: "dr.elena.rostova@smartclinic.com",
+    phone: "+84 (028) 3900 1205",
+    extension: "Ext. 205",
+    roomNumber: "Suite 205 (Level 2)",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_5QbsbX2YbWKJgZlFJhxs8qOjEw1FrCdCepjQi-sHvwrV4KesoqxqIIA&s=10",
+    availableToday: true,
+    bio: "ENT specialist with extensive clinical research in allergic rhinitis, vocal health, and minimally invasive nasal treatments.",
+  },
+  {
+    id: "julian-chen",
+    name: "Dr. Julian Chen",
+    role: "DOCTOR",
+    title: "Consultant Pediatrician",
+    age: 39,
+    department: "Pediatrics & Family Medicine",
+    specialty: "Pediatric Asthma & Food Allergy Screening",
+    experienceYears: 11,
+    qualifications: ["BMed", "FRACGP"],
+    languages: ["English", "Mandarin"],
+    email: "dr.julian.chen@smartclinic.com",
+    phone: "+84 (028) 3900 1108",
+    extension: "Ext. 108",
+    roomNumber: "Suite 108 (Level 1)",
+    imageUrl:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuCAPQj7GqGxzxy5XysDPR2WuiS7o1U_WR7dIzgAFYppclhcDcEjpO0qc&s=10",
+    availableToday: true,
+    bio: "Empathetic pediatrician focused on gentle childhood allergy assessment, early respiratory support, and family health education.",
+  },
+  {
+    id: "sarah-jenkins",
+    name: "Sarah Jenkins",
+    role: "NURSE",
+    title: "Lead Triage Nurse",
+    age: 36,
+    department: "Outpatient Clinical Diagnostics",
+    specialty: "Lead Triage Nurse & Allergy Testing Coordinator",
+    experienceYears: 12,
+    qualifications: ["BSN", "RN"],
+    languages: ["English"],
+    email: "nurse.sarah.jenkins@smartclinic.com",
+    phone: "+84 (028) 3900 1011",
+    extension: "Ext. 111",
+    roomNumber: "Triage Station A (Level 1)",
+    imageUrl:
+      "https://cdn.prod.website-files.com/5babc11099f97ea5dbcf24d5/674e02bfb70719d29df790c2_clinic-nurse.jpg",
+    availableToday: true,
+    bio: "Supervises the intradermal allergy diagnostic wing, pre-consultation vitals monitoring, and emergency response readiness.",
+  },
+  {
+    id: "emily-rodriguez",
+    name: "Emily Rodriguez",
+    role: "NURSE",
+    title: "Registered Nurse",
+    age: 31,
+    department: "Pediatric Care",
+    specialty: "Pediatric Comfort & Vaccination Coordination",
+    experienceYears: 8,
+    qualifications: ["RN"],
+    languages: ["English", "Spanish"],
+    email: "nurse.emily.rodriguez@smartclinic.com",
+    phone: "+84 (028) 3900 1012",
+    extension: "Ext. 112",
+    roomNumber: "Pediatric Care Bay (Level 1)",
+    imageUrl:
+      "https://eaglegatecollege.edu/wp-content/uploads/2023/09/shutterstock_2279543395-scaled.jpg",
+    availableToday: true,
+    bio: "Dedicated to soothing clinical care for infants, pediatric allergy patch preparation, and family guidance.",
+  },
+  {
+    id: "amina-patel",
+    name: "Amina Patel",
+    role: "NURSE",
+    title: "Infusion Treatment Nurse",
+    age: 33,
+    department: "Ambulatory & Infusion Wing",
+    specialty: "Immunotherapy Injection & Biologics Monitoring",
+    experienceYears: 9,
+    qualifications: ["BSN"],
+    languages: ["English", "Gujarati"],
+    email: "nurse.amina.patel@smartclinic.com",
+    phone: "+84 (028) 3900 1013",
+    extension: "Ext. 113",
+    roomNumber: "Treatment Room 3 (Level 2)",
+    imageUrl:
+      "https://xpresshealth.co.uk/_next/image?url=https%3A%2F%2Fbackend.xpresshealth.co.uk%2Fuploads%2F2025%2F04%2F513-min.jpg&w=1920&q=100",
+    availableToday: true,
+    bio: "Administers targeted desensitization injections, sublingual drops, and monitors patient post-treatment recovery.",
+  },
+  {
+    id: "zainab-okafor",
+    name: "Zainab Okafor",
+    role: "NURSE",
+    title: "Intake Coordinator Nurse",
+    age: 37,
+    department: "Express Intake & Kiosk Navigation",
+    specialty: "Rapid Triage Assessment & Patient Support",
+    experienceYears: 13,
+    qualifications: ["RN", "MSN"],
+    languages: ["English"],
+    email: "nurse.zainab.okafor@smartclinic.com",
+    phone: "+84 (028) 3900 1014",
+    extension: "Ext. 114",
+    roomNumber: "Welcome Kiosk Hub (Ground Floor)",
+    imageUrl:
+      "https://media.istockphoto.com/id/2187596982/photo/portrait-of-smiling-african-woman-nurse.jpg?s=612x612&w=0&k=20&c=OC0idN57sR1dpEOCIaBX9ger5rJk9tl5hK7HX-xM8nA=",
+    availableToday: true,
+    bio: "Assists incoming walk-ins and seniors with kiosk check-in, preliminary vitals, and electronic medical intake.",
+  },
+];
 
 export interface TransitNote {
   icon: LucideIcon;

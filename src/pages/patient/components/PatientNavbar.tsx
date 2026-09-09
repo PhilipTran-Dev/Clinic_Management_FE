@@ -4,7 +4,7 @@ import { Activity, ChevronDown, Clock, MapPin, PhoneCall } from "lucide-react";
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Doctors", href: "#specialists" },
+  { label: "Doctors", href: "#doctors" },
   { label: "Locations", href: "#locations" },
   { label: "FAQ", href: "#faq" },
 ];
