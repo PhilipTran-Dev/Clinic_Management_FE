@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { PHARMACY_FORMULARY } from "../data/doctorMockData";
-import type { RxLine } from "../data/doctorMockData";
+import type { Allergy, RxLine } from "../data/doctorMockData";
 
 interface PrescriptionDraftTableProps {
   rxLines: RxLine[];
   setRxLines: React.Dispatch<React.SetStateAction<RxLine[]>>;
+  allergies: Allergy[];
 }
 
 export default function PrescriptionDraftTable({
   rxLines,
   setRxLines,
+  allergies,
 }: PrescriptionDraftTableProps) {
   const [selected, setSelected] = useState(PHARMACY_FORMULARY[0].name);
 
@@ -25,6 +27,8 @@ export default function PrescriptionDraftTable({
       duration: med.defaultDuration,
       quantity: 1,
       stockUnits: med.stockUnits,
+      bhytCoverage: med.bhytCoverage,
+      isPenicillinClass: med.isPenicillinClass,
     };
     setRxLines((prev) => [...prev, newLine]);
   }
@@ -35,26 +39,39 @@ export default function PrescriptionDraftTable({
     );
   }
 
+  const hasPenicillinAllergy = allergies.some((a) =>
+    a.name.toLowerCase().includes("penicillin"),
+  );
+  const hasPenicillinRx = rxLines.some((line) => line.isPenicillinClass);
+  const showConflictWarning = hasPenicillinAllergy && hasPenicillinRx;
+
   return (
     <div className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card">
       <div className="flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-          Prescription Formulation
+          Bảng Kê Đơn Thuốc
         </p>
         <span className="rounded-md bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold uppercase text-teal-700">
-          AI-Draft
+          Đề xuất AI
         </span>
       </div>
+
+      {showConflictWarning && (
+        <div className="mt-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
+          ⚠️ CẢNH BÁO DỊ ỨNG: Bệnh nhân có tiền sử dị ứng với Penicillin! Vui
+          lòng thay thế bằng nhóm kháng sinh khác.
+        </div>
+      )}
 
       <table className="mt-2 w-full border-collapse text-xs">
         <thead>
           <tr className="border-b border-slate-200 text-left text-[11px] font-semibold text-slate-500">
-            <th className="py-1.5 pr-2">Medication</th>
-            <th className="py-1.5 pr-2">Dosage &amp; Form</th>
-            <th className="py-1.5 pr-2">Route &amp; Frequency</th>
-            <th className="py-1.5 pr-2">Duration</th>
-            <th className="py-1.5 pr-2">Qty</th>
-            <th className="py-1.5 text-right">Action</th>
+            <th className="py-1.5 pr-2">Tên Thuốc &amp; Hoạt chất</th>
+            <th className="py-1.5 pr-2">Dạng bào chế</th>
+            <th className="py-1.5 pr-2">Cách dùng &amp; Tần suất</th>
+            <th className="py-1.5 pr-2">Liều dùng</th>
+            <th className="py-1.5 pr-2">SL</th>
+            <th className="py-1.5 text-right">Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -73,8 +90,11 @@ export default function PrescriptionDraftTable({
                         : "border border-teal-200 bg-teal-50 text-teal-700"
                     }`}
                   >
-                    ● {lowStock ? "Low Stock" : "In Stock"}: {line.stockUnits}{" "}
-                    units
+                    ● {lowStock ? "Sắp hết" : "Còn hàng"}: {line.stockUnits} đơn
+                    vị
+                  </span>
+                  <span className="mt-0.5 ml-1 inline-block rounded-full border border-teal-200 bg-teal-50 px-1.5 py-0.5 text-[10px] font-semibold text-teal-700">
+                    ● {line.bhytCoverage}
                   </span>
                 </td>
                 <td className="py-2 pr-2 text-slate-600">
@@ -111,7 +131,7 @@ export default function PrescriptionDraftTable({
                         prev.filter((item) => item.id !== line.id),
                       )
                     }
-                    aria-label={`Remove ${line.medication}`}
+                    aria-label={`Xóa ${line.medication}`}
                     className="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -123,7 +143,7 @@ export default function PrescriptionDraftTable({
           {rxLines.length === 0 && (
             <tr>
               <td colSpan={6} className="py-4 text-center text-slate-400">
-                No medications added yet.
+                Chưa có thuốc nào được kê.
               </td>
             </tr>
           )}
@@ -139,7 +159,7 @@ export default function PrescriptionDraftTable({
         >
           {PHARMACY_FORMULARY.map((med) => (
             <option key={med.name} value={med.name}>
-              {med.name} ({med.dosageForm}) — {med.stockUnits} in stock
+              {med.name} ({med.dosageForm}) — Còn {med.stockUnits} đơn vị
             </option>
           ))}
         </select>
@@ -149,7 +169,7 @@ export default function PrescriptionDraftTable({
           className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-teal-600 bg-teal-50 px-3 text-xs font-semibold text-teal-700 transition-colors hover:bg-teal-600 hover:text-white"
         >
           <Plus className="h-3.5 w-3.5" aria-hidden="true" />
-          Add Medicine
+          Thêm thuốc vào đơn
         </button>
       </div>
     </div>

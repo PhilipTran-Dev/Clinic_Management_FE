@@ -19,12 +19,12 @@ export default function PatientHistoryModal({
       className="fixed inset-0 z-50"
       role="dialog"
       aria-modal="true"
-      aria-label="Patient medical history"
+      aria-label="Lịch sử bệnh án bệnh nhân"
     >
       {/* Backdrop */}
       <button
         type="button"
-        aria-label="Close medical history"
+        aria-label="Đóng lịch sử bệnh án"
         onClick={onClose}
         className="absolute inset-0 bg-slate-900/40"
       />
@@ -37,13 +37,13 @@ export default function PatientHistoryModal({
               {patient.name}
             </p>
             <p className="text-xs text-slate-500">
-              {patient.patientId} &middot; {patient.age} yrs
+              {patient.patientId} &middot; {patient.age} tuổi
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close panel"
+            aria-label="Đóng bảng điều khiển"
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
           >
             <X className="h-4 w-4" />
@@ -54,7 +54,7 @@ export default function PatientHistoryModal({
           {/* Past consultations */}
           <section>
             <h3 className="text-xs font-semibold uppercase tracking-wide text-teal-700">
-              Past Consultations ({patient.pastEncounters.length})
+              Lịch sử khám bệnh ({patient.pastEncounters.length})
             </h3>
             <div className="mt-2 space-y-2">
               {patient.pastEncounters.map((encounter) => (
@@ -88,11 +88,49 @@ export default function PatientHistoryModal({
           <section>
             <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-teal-700">
               <FileText className="h-3.5 w-3.5" />
-              Lab Reports ({patient.labReports.length})
+              Đơn thuốc cũ (OCR) ({patient.scannedOldPrescriptions.length})
+            </h3>
+            <div className="mt-2 space-y-2">
+              {patient.scannedOldPrescriptions.length === 0 && (
+                <p className="text-xs text-slate-400">
+                  Không có đơn thuốc cũ nào được quét.
+                </p>
+              )}
+              {patient.scannedOldPrescriptions.map((rx) => (
+                <article
+                  key={rx.id}
+                  className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] font-medium text-slate-500">
+                      {rx.id}
+                    </span>
+                    <span className="text-[11px] font-medium text-slate-500">
+                      {rx.date}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm font-semibold text-slate-900">
+                    {rx.medication}
+                  </p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-slate-600">
+                    {rx.dosage} &middot; OCR {rx.ocrConfidence}%
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* Lab reports */}
+          <section>
+            <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-teal-700">
+              <FileText className="h-3.5 w-3.5" />
+              Kết quả xét nghiệm ({patient.labReports.length})
             </h3>
             <div className="mt-2 space-y-2">
               {patient.labReports.length === 0 && (
-                <p className="text-xs text-slate-400">No lab reports on file.</p>
+                <p className="text-xs text-slate-400">
+                  Chưa có kết quả xét nghiệm nào trong hồ sơ.
+                </p>
               )}
               {patient.labReports.map((lab) => (
                 <article
@@ -112,7 +150,11 @@ export default function PatientHistoryModal({
                             : "border-amber-200 bg-amber-50 text-amber-700"
                       }`}
                     >
-                      {lab.status}
+                      {lab.status === "Normal"
+                        ? "Bình thường"
+                        : lab.status === "Abnormal"
+                          ? "Bất thường"
+                          : "Đang chờ"}
                     </span>
                   </div>
                   <p className="mt-1 text-xs font-semibold text-slate-700">

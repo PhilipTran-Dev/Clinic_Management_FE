@@ -30,8 +30,8 @@ export default function AmbientRecordingBar({
     return (
       <div className="flex shrink-0 items-center justify-between border-b border-slate-200/80 bg-white px-4 py-2.5">
         <p className="text-xs text-slate-500">
-          Ambient AI listens to your clinical conversation to automatically
-          draft SOAP notes.
+          Trợ lý AI lắng nghe cuộc đối thoại lâm sàng để tự động soạn bệnh án
+          SOAP &amp; gợi ý mã ICD-10.
         </p>
         <button
           type="button"
@@ -39,7 +39,7 @@ export default function AmbientRecordingBar({
           className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-700"
         >
           <Mic className="h-4 w-4" aria-hidden="true" />
-          Start Ambient Recording
+          Bắt đầu Thu âm Cuộc khám
         </button>
       </div>
     );
@@ -56,12 +56,12 @@ export default function AmbientRecordingBar({
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-60" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
               </span>
-              RECORDING IN PROGRESS
+              ĐANG THU ÂM CUỘC KHÁM
             </>
           ) : (
             <>
               <span className="inline-block h-2 w-2 rounded-full bg-amber-500" aria-hidden="true" />
-              RECORDING PAUSED
+              TẠM DỪNG THU ÂM
             </>
           )}
         </span>
@@ -78,7 +78,7 @@ export default function AmbientRecordingBar({
         </span>
 
         <span className="text-sm font-semibold tabular-nums text-slate-900">
-          {formatDuration(elapsedSeconds)}
+          {formatDuration(elapsedSeconds)} phút
         </span>
 
         <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ export default function AmbientRecordingBar({
               className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
             >
               <Pause className="h-4 w-4" aria-hidden="true" />
-              Pause
+              Tạm dừng
             </button>
           ) : (
             <button
@@ -98,7 +98,7 @@ export default function AmbientRecordingBar({
               className="inline-flex items-center gap-1.5 rounded-lg bg-teal-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-teal-700"
             >
               <Play className="h-4 w-4" aria-hidden="true" />
-              Resume
+              Tiếp tục
             </button>
           )}
           <button
@@ -107,7 +107,7 @@ export default function AmbientRecordingBar({
             className="inline-flex items-center gap-1.5 rounded-lg bg-cta px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
           >
             <Square className="h-4 w-4" aria-hidden="true" />
-            Finish &amp; Generate AI Draft
+            Hoàn tất Khám &amp; Sinh Bệnh án AI
           </button>
         </div>
       </div>
@@ -119,7 +119,8 @@ export default function AmbientRecordingBar({
       <div className="flex shrink-0 items-center gap-3 border-b border-slate-200/80 bg-white px-4 py-2.5">
         <Loader2 className="h-4 w-4 animate-spin text-teal-600" aria-hidden="true" />
         <span className="text-sm font-medium text-slate-700">
-          Transcribing with Whisper &amp; extracting FHIR SOAP notes...
+          Hệ thống đang chuyển ngữ qua Whisper &amp; bóc tách bệnh án FHIR
+          SOAP...
         </span>
       </div>
     );
@@ -130,7 +131,8 @@ export default function AmbientRecordingBar({
       <div className="flex shrink-0 items-center gap-2 border-b border-slate-200/80 bg-teal-50 px-4 py-2.5">
         <MicOff className="h-4 w-4 text-teal-700" aria-hidden="true" />
         <span className="text-sm font-semibold text-teal-800">
-          AI Draft ready — please review and adjust before signing below.
+          🤖 Bệnh án AI đã sẵn sàng — Bác sĩ vui lòng kiểm tra và chỉnh sửa
+          trước khi ký duyệt.
         </span>
       </div>
     );

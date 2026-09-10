@@ -14,15 +14,15 @@ const TRIAGE_STYLES: Record<
   { label: string; className: string }
 > = {
   P1: {
-    label: "P1 - Emergency",
+    label: "P1 - Khẩn cấp",
     className: "border-red-200 bg-red-50 text-red-700 font-bold",
   },
   P2: {
-    label: "P2 - Urgent",
+    label: "P2 - Cần khám sớm",
     className: "border-amber-200 bg-amber-50 text-amber-700 font-semibold",
   },
   P3: {
-    label: "P3 - Routine",
+    label: "P3 - Khám thường",
     className: "border-emerald-200 bg-emerald-50 text-emerald-700 font-medium",
   },
 };
@@ -41,7 +41,7 @@ export default function PatientQueueDrawer({
         <button
           type="button"
           onClick={() => setCollapsed(false)}
-          aria-label="Expand patient queue"
+          aria-label="Mở rộng hàng đợi bệnh nhân"
           className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-teal-700"
         >
           <ChevronRight className="h-4 w-4" />
@@ -59,15 +59,15 @@ export default function PatientQueueDrawer({
       {/* Drawer header */}
       <div className="flex items-center justify-between border-b border-slate-200/80 px-3 py-2.5">
         <div>
-          <p className="text-sm font-bold text-slate-900">Patient Queue</p>
+          <p className="text-sm font-bold text-slate-900">Hàng đợi Bệnh nhân</p>
           <p className="text-xs text-slate-500">
-            Redis Priority Queue &middot; triage + wait time
+            Sắp xếp ưu tiên theo Triage &amp; Thời gian chờ.
           </p>
         </div>
         <button
           type="button"
           onClick={() => setCollapsed(true)}
-          aria-label="Collapse patient queue"
+          aria-label="Thu gọn hàng đợi bệnh nhân"
           className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-teal-700"
         >
           <ChevronRight className="h-4 w-4 rotate-180" />
@@ -83,7 +83,9 @@ export default function PatientQueueDrawer({
           className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-teal-600 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
         >
           <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-          {activePatient ? `In Consultation: ${activePatient.ticketNumber}` : "Call Next Patient"}
+          {activePatient
+            ? `Đang khám: ${activePatient.ticketNumber}`
+            : "Gọi Bệnh Nhân Tiếp Theo"}
         </button>
       </div>
 
@@ -91,7 +93,7 @@ export default function PatientQueueDrawer({
       <div className="flex-1 space-y-2 overflow-y-auto p-3">
         {queue.length === 0 && (
           <p className="py-6 text-center text-xs text-slate-400">
-            Queue is empty.
+            Hàng đợi đang trống.
           </p>
         )}
         {queue.map((patient) => {
@@ -115,8 +117,8 @@ export default function PatientQueueDrawer({
                 {patient.name}
               </p>
               <p className="text-xs text-slate-500">
-                {patient.age} yrs, {patient.gender} &middot; Arrived{" "}
-                {patient.arrivalTime} &middot; Score{" "}
+                {patient.age} tuổi, {patient.gender} &middot; Đến lúc{" "}
+                {patient.arrivalTime} &middot; Điểm{" "}
                 <span className="font-semibold text-teal-700">
                   {patient.priorityScore}
                 </span>
@@ -138,7 +140,7 @@ export default function PatientQueueDrawer({
                   onClick={() => onSkip(patient.ticketNumber)}
                   className="rounded-md px-2 py-1 text-[11px] font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700"
                 >
-                  Skip
+Bỏ qua
                 </button>
               </div>
             </article>

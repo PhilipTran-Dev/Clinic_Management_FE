@@ -43,17 +43,17 @@ export default function DoctorEHRPage() {
     }
     approve();
     toast.success(
-      `Encounter ${ENCOUNTER_ID} finalized. Prescription sent to Pharmacy Counter.`,
+      `Ca khám ${ENCOUNTER_ID} đã hoàn tất. Đơn thuốc điện tử đã được chuyển xuống Quầy Dược.`,
       { duration: 4000 },
     );
   }
 
   function handleSaveDraft() {
-    toast.info("Draft saved locally as incomplete. Continue later.");
+    toast.info("Đã lưu bệnh án nháp (chưa hoàn tất). Bác sĩ có thể tiếp tục sau.");
   }
 
   function handleRefer() {
-    toast.info("Referral workflow initiated to hospital specialist.");
+    toast.info("Đã kích hoạt quy trình chuyển tuyến / hội chẩn Bệnh viện.");
   }
 
   return (
@@ -107,6 +107,7 @@ export default function DoctorEHRPage() {
                     setIcdAccepted={setIcdAccepted}
                     rxLines={rxLines}
                     setRxLines={setRxLines}
+                    allergies={queue.activePatient.allergies}
                   />
                 }
               />
@@ -119,7 +120,7 @@ export default function DoctorEHRPage() {
                     onClick={handleSaveDraft}
                     className="inline-flex h-10 items-center rounded-lg border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
                   >
-                    Save Draft / Incomplete
+                    Lưu Bệnh án Nháp / Chưa hoàn tất
                   </button>
                   <button
                     type="button"
@@ -127,17 +128,17 @@ export default function DoctorEHRPage() {
                     className="inline-flex h-10 items-center rounded-lg border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
                   >
                     <Send className="mr-1.5 h-4 w-4" aria-hidden="true" />
-                    Refer to Hospital / Specialist
+                    Chuyển tuyến Bệnh viện / Hội chẩn
                   </button>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <span className="text-xs text-slate-500">
                     {status === "DRAFT_READY"
-                      ? "AI draft pending doctor review"
+                      ? "Bệnh án AI chờ bác sĩ kiểm duyệt"
                       : status === "APPROVED"
-                        ? "Encounter finalized"
-                        : "Awaiting AI draft"}
+                        ? "Ca khám đã hoàn tất"
+                        : "Đang chờ bệnh án AI"}
                   </span>
                   <button
                     type="button"
@@ -146,7 +147,7 @@ export default function DoctorEHRPage() {
                     className="inline-flex h-12 items-center gap-2 rounded-lg bg-teal-600 px-8 text-base font-bold text-white shadow-md transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-500"
                   >
                     <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-                    Approve Medical Record &amp; Send to Pharmacy
+                    ✍️ Phê Duyệt Bệnh Án &amp; Đẩy Đơn Xuống Quầy Dược
                   </button>
                 </div>
               </footer>
@@ -158,11 +159,11 @@ export default function DoctorEHRPage() {
               </span>
               <div>
                 <p className="text-base font-bold text-slate-900">
-                  Queue ready for the next patient
+                  Hàng đợi đã sẵn sàng cho bệnh nhân kế tiếp
                 </p>
                 <p className="mt-1 text-sm text-slate-500">
-                  Use "Call Next Patient" in the queue drawer to start the next
-                  consultation.
+                  Nhấn "Gọi Bệnh Nhân Tiếp Theo" trong khung hàng đợi để bắt
+                  đầu ca khám.
                 </p>
               </div>
             </div>

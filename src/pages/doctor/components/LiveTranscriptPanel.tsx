@@ -19,19 +19,19 @@ const ENTITY_STYLES: Record<
   { label: string; className: string }
 > = {
   SYMPTOM: {
-    label: "Symptom",
+    label: "Triệu chứng",
     className: "border-sky-200 bg-sky-50 text-sky-700",
   },
   DURATION: {
-    label: "Duration",
+    label: "Thời gian",
     className: "border-slate-200 bg-slate-100 text-slate-700",
   },
   VITALS: {
-    label: "Vitals",
+    label: "Sinh hiệu",
     className: "border-red-200 bg-red-50 text-red-700",
   },
   ALLERGY: {
-    label: "Allergy",
+    label: "Dị ứng",
     className: "border-red-300 bg-red-50 text-red-700",
   },
 };
@@ -104,7 +104,7 @@ export default function LiveTranscriptPanel({
               : "text-slate-600 hover:bg-slate-100"
           }`}
         >
-          Previous Encounters &amp; Labs
+          Đơn thuốc cũ &amp; Kết quả CLS (OCR)
         </button>
       </div>
 
@@ -113,8 +113,8 @@ export default function LiveTranscriptPanel({
         <div className="flex-1 space-y-3 overflow-y-auto p-3">
           {revealedLines.length === 0 && (
             <p className="px-2 py-8 text-center text-xs text-slate-400">
-              Start ambient recording to stream the live consultation
-              transcript with clinical entity tags.
+              Bắt đầu thu âm để xem trực tiếp hội thoại lâm sàng với các thẻ
+              bóc tách y khoa.
             </p>
           )}
           {revealedLines.map((line) => (
@@ -126,7 +126,7 @@ export default function LiveTranscriptPanel({
                     : "bg-slate-100 text-slate-700"
                 }`}
               >
-                {line.speaker === "DOCTOR" ? "Doctor" : "Patient"}
+                {line.speaker === "DOCTOR" ? "Bác sĩ" : "Bệnh nhân"}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="flex items-center justify-between">
@@ -162,7 +162,7 @@ export default function LiveTranscriptPanel({
           <div className="space-y-3">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-wide text-teal-700">
-                Historical Encounters ({patient.pastEncounters.length})
+                Lịch sử khám bệnh ({patient.pastEncounters.length})
               </p>
               <div className="mt-1.5 space-y-2">
                 {patient.pastEncounters.map((encounter) => (
@@ -188,7 +188,38 @@ export default function LiveTranscriptPanel({
             <div>
               <p className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-teal-700">
                 <FileText className="h-3 w-3" />
-                Lab Reports ({patient.labReports.length})
+                Đơn thuốc cũ (OCR) ({patient.scannedOldPrescriptions.length})
+              </p>
+              <div className="mt-1.5 space-y-2">
+                {patient.scannedOldPrescriptions.map((rx) => (
+                  <div
+                    key={rx.id}
+                    className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card"
+                  >
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span className="font-mono">{rx.id}</span>
+                      <span>{rx.date}</span>
+                    </div>
+                    <p className="mt-1 text-xs font-semibold text-slate-900">
+                      {rx.medication}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {rx.dosage} &middot; OCR {rx.ocrConfidence}%
+                    </p>
+                  </div>
+                ))}
+                {patient.scannedOldPrescriptions.length === 0 && (
+                  <p className="text-xs text-slate-400">
+                    Không có đơn thuốc cũ nào được quét.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <p className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-teal-700">
+                <FileText className="h-3 w-3" />
+                Kết quả xét nghiệm ({patient.labReports.length})
               </p>
               <div className="mt-1.5 space-y-2">
                 {patient.labReports.map((lab) => (

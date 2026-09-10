@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Icd10Selector from "./Icd10Selector";
 import PrescriptionDraftTable from "./PrescriptionDraftTable";
-import type { IcdCode, RxLine, SoapDraft } from "../data/doctorMockData";
+import type {
+  Allergy,
+  IcdCode,
+  RxLine,
+  SoapDraft,
+} from "../data/doctorMockData";
 import type { ConsultationStatus } from "../hooks/useAmbientConsultation";
 
 interface SoapNoteEditorProps {
@@ -13,6 +18,7 @@ interface SoapNoteEditorProps {
   setIcdAccepted: React.Dispatch<React.SetStateAction<IcdCode[]>>;
   rxLines: RxLine[];
   setRxLines: React.Dispatch<React.SetStateAction<RxLine[]>>;
+  allergies: Allergy[];
 }
 
 const SOAP_FIELDS: {
@@ -22,23 +28,23 @@ const SOAP_FIELDS: {
 }[] = [
   {
     key: "subjective",
-    label: "S - Subjective",
-    placeholder: "Patient complaints, timeline, and reported symptoms...",
+    label: "S - Lý do vào viện & Bệnh sử",
+    placeholder: "Phàn nàn của bệnh nhân, diễn tiến thời gian và triệu chứng...",
   },
   {
     key: "objective",
-    label: "O - Objective",
-    placeholder: "Physical exam findings, throat inspection, lung sounds, vitals...",
+    label: "O - Khám lâm sàng & Dấu hiệu sinh tồn",
+    placeholder: "Kết quả thăm khám, ghi nhận họng, phổi, sinh hiệu...",
   },
   {
     key: "assessment",
-    label: "A - Assessment",
-    placeholder: "Primary clinical assessment and reasoning with ICD-10 codes...",
+    label: "A - Chẩn đoán & Đánh giá lâm sàng",
+    placeholder: "Chẩn đoán chính và lập luận lâm sàng với mã ICD-10...",
   },
   {
     key: "plan",
-    label: "P - Plan",
-    placeholder: "Treatment protocol, diagnostic orders, and home-care advice...",
+    label: "P - Kế hoạch điều trị & Dặn dò",
+    placeholder: "Phác đồ điều trị, y lệnh chẩn đoán và tư vấn chăm sóc tại nhà...",
   },
 ];
 
@@ -51,6 +57,7 @@ export default function SoapNoteEditor({
   setIcdAccepted,
   rxLines,
   setRxLines,
+  allergies,
 }: SoapNoteEditorProps) {
   const [expanded, setExpanded] = useState<keyof SoapDraft | null>(null);
 
@@ -78,8 +85,8 @@ export default function SoapNoteEditor({
     <div className="flex-1 space-y-3 overflow-y-auto p-3">
       {showBanner && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
-          <span className="font-bold">[AI-Draft]</span> Generated via Whisper +
-          GPT-4o - Please review and adjust before signing.
+          <span className="font-bold">[🤖 Bệnh án Nháp sinh tự động bởi Whisper + GPT-4o]</span>{" "}
+          Vui lòng đối soát chuyên môn trước khi ký duyệt.
         </div>
       )}
 
@@ -125,7 +132,11 @@ export default function SoapNoteEditor({
       />
 
       {/* Prescription */}
-      <PrescriptionDraftTable rxLines={rxLines} setRxLines={setRxLines} />
+      <PrescriptionDraftTable
+        rxLines={rxLines}
+        setRxLines={setRxLines}
+        allergies={allergies}
+      />
     </div>
   );
 }

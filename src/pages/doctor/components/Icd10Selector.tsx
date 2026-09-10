@@ -35,10 +35,10 @@ export default function Icd10Selector({
     <div className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card">
       <div className="flex items-center justify-between">
         <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-          ICD-10 Diagnostic Codes
+          Mã Chẩn Đoán ICD-10
         </p>
         <span className="rounded-md bg-teal-50 px-1.5 py-0.5 text-[10px] font-bold uppercase text-teal-700">
-          AI-Draft
+          Đề xuất AI
         </span>
       </div>
 
@@ -64,11 +64,11 @@ export default function Icd10Selector({
                 {item.label}
               </span>
               <span className="shrink-0 rounded-full bg-white px-1.5 py-0.5 text-[10px] font-semibold text-teal-700">
-                {item.confidence}%
+                Độ tin cậy: {item.confidence}%
               </span>
               {isAccepted && (
                 <span className="text-[10px] font-bold text-teal-700">
-                  Primary
+                  Chính
                 </span>
               )}
             </button>
@@ -88,7 +88,7 @@ export default function Icd10Selector({
               <button
                 type="button"
                 onClick={() => onRemove(item.code)}
-                aria-label={`Remove code ${item.code}`}
+                aria-label={`Xóa mã ${item.code}`}
                 className="text-teal-600 hover:text-red-600"
               >
                 <X className="h-3 w-3" />
@@ -112,7 +112,7 @@ export default function Icd10Selector({
           }}
           onFocus={() => setOpen(true)}
           onBlur={() => window.setTimeout(() => setOpen(false), 150)}
-          placeholder="Search ICD-10 code or description..."
+          placeholder="Tìm kiếm mã ICD-10 hoặc tên bệnh lý..."
           className="h-9 w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 text-xs text-slate-800 placeholder:text-slate-400 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         />
         {open && results.length > 0 && (
