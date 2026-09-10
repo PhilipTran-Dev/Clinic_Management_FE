@@ -1,11 +1,18 @@
-import { useState, type FormEvent } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import { Calendar, ChevronLeft, Check, PhoneCall } from "lucide-react";
 import { toast } from "sonner";
 import PatientNavbar from "./components/PatientNavbar";
 import PatientFooter from "./components/PatientFooter";
 import SymptomsStep from "./components/SymptomsStep";
-import { CLINIC_SERVICES } from "./data/clinicContent";
+import BookingTicketModal from "./components/BookingTicketModal";
+import FloatingRagChatbot from "./components/FloatingRagChatbot";
+import {
+  CLINIC_SERVICES,
+  resolveDoctorForService,
+} from "./data/clinicContent";
+import { triageSymptoms } from "./data/patientMockRecords";
 import type { Service } from "./data/clinicContent";
+import type { ActiveAppointment, BhyTelemetry } from "./data/patientMockRecords";
 
 const TIME_SLOTS = [
   "08:30",
@@ -18,35 +25,7 @@ const TIME_SLOTS = [
   "17:30",
 ];
 
-const STEP_LABELS = ["Symptoms", "Department", "Confirm"];
-
-function suggestDepartment(symptoms: string): Service | null {
-  const text = symptoms.toLowerCase();
-  const allergyPattern =
-    /allerg|rash|itch|sneeze|hay\s?fever|wheez|hive|eczema|skin/;
-  const respiratoryPattern = /asthma|cough|short\s?of\s?breath|breathless|cold/;
-  const childPattern = /child|baby|toddler|infant|kid/;
-
-  if (childPattern.test(text)) {
-    return (
-      CLINIC_SERVICES.find((s) => s.title === "Pediatric Healthcare") ??
-      CLINIC_SERVICES[0]
-    );
-  }
-  if (allergyPattern.test(text)) {
-    return (
-      CLINIC_SERVICES.find((s) => s.title === "Comprehensive Allergy Testing") ??
-      CLINIC_SERVICES[0]
-    );
-  }
-  if (respiratoryPattern.test(text)) {
-    return (
-      CLINIC_SERVICES.find((s) => s.title === "Respiratory & Asthma Management") ??
-      CLINIC_SERVICES[0]
-    );
-  }
-  return null;
-}
+const STEP_LABELS = ["Triệu chứng", "Chuyên khoa", "Xác nhận"];
 
 export default function BookingPage() {
   const [step, setStep] = useState(0);
@@ -55,43 +34,53 @@ export default function BookingPage() {
   const [timeSlot, setTimeSlot] = useState<string | null>(null);
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
+  const [ocrData, setOcrData] = useState<BhyTelemetry | null>(null);
+  const [ticket, setTicket] = useState<ActiveAppointment | null>(null);
 
-  const suggestion = suggestDepartment(symptoms);
+  const suggestion = triageSymptoms(symptoms);
   const suggestedIdx = suggestion
-    ? CLINIC_SERVICES.findIndex((s) => s.title === suggestion.title)
+    ? CLINIC_SERVICES.findIndex((s) => s.title === suggestion.department)
     : null;
 
-  function reset() {
+  const handleOcrExtracted = useCallback((info: BhyTelemetry) => {
+    setOcrData(info);
+    setFullName((current) => current.trim() || info.fullName);
+    setPhone((current) => current.trim() || info.phone);
+  }, []);
+
+  function resetBooking() {
     setStep(0);
     setSymptoms("");
     setDeptIdx(null);
     setTimeSlot(null);
     setFullName("");
     setPhone("");
+    setOcrData(null);
+    setTicket(null);
   }
 
   function validateStep(): boolean {
     if (step === 0 && !symptoms.trim()) {
-      toast.error("Please tell us a little about your symptoms so we can guide you.");
+      toast.error("Vui lòng chia sẻ một chút về triệu chứng của bạn để chúng tôi hỗ trợ.");
       return false;
     }
     if (step === 1) {
       if (deptIdx === null) {
-        toast.error("Please choose a department.");
+        toast.error("Vui lòng chọn một chuyên khoa.");
         return false;
       }
       if (!timeSlot) {
-        toast.error("Please pick a time slot.");
+        toast.error("Vui lòng chọn khung giờ khám.");
         return false;
       }
     }
     if (step === 2) {
       if (!fullName.trim()) {
-        toast.error("Please provide your full name.");
+        toast.error("Vui lòng cung cấp họ và tên đầy đủ.");
         return false;
       }
       if (!phone.trim() || phone.trim().length < 8) {
-        toast.error("Please provide a valid phone number.");
+        toast.error("Vui lòng cung cấp số điện thoại hợp lệ.");
         return false;
       }
     }
@@ -102,11 +91,18 @@ export default function BookingPage() {
     if (!validateStep()) return;
 
     if (step === 2) {
-      const service = deptIdx !== null ? CLINIC_SERVICES[deptIdx] : null;
-      toast.success(
-        `Appointment requested for ${service?.title ?? "General Consultation"} at ${timeSlot}. We'll confirm by SMS shortly.`,
-      );
-      reset();
+      const service: Service =
+        deptIdx !== null ? CLINIC_SERVICES[deptIdx] : CLINIC_SERVICES[0];
+      const doctor = resolveDoctorForService(service.title);
+      setTicket({
+        ticketCode: "#APT-2026-8821",
+        patientName: fullName.trim().toUpperCase(),
+        department: doctor.department,
+        doctor: doctor.name,
+        room: doctor.roomNumber,
+        date: "Hôm nay",
+        timeSlot: timeSlot ?? "08:30",
+      });
       return;
     }
     setStep((s) => s + 1);
@@ -130,13 +126,14 @@ export default function BookingPage() {
           <div className="text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 shadow-card">
               <Calendar className="h-4 w-4 text-clinical-600" />
-              No upfront payment &middot; Walk-ins welcome
+              Không cần thanh toán trước &middot; Tiếp nhận cả bệnh nhân vãng lai
             </span>
             <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
-              Book an Appointment
+              Đặt lịch khám
             </h1>
             <p className="mt-2 text-base leading-relaxed text-slate-500">
-              Three quick steps and you&apos;re done - we&apos;ll confirm by SMS.
+              Ba bước nhanh chóng và bạn xong - chúng tôi sẽ xác nhận qua tin
+              nhắn SMS.
             </p>
           </div>
 
@@ -187,6 +184,7 @@ export default function BookingPage() {
                   symptoms={symptoms}
                   onChange={setSymptoms}
                   onContinue={handleNext}
+                  onOcrExtracted={handleOcrExtracted}
                 />
               )}
 
@@ -194,7 +192,7 @@ export default function BookingPage() {
                 <div className="space-y-5">
                   <div>
                     <p className="mb-3 text-base font-medium text-slate-900">
-                      Choose a department
+                      Chọn chuyên khoa
                     </p>
                     <div className="grid gap-2 sm:grid-cols-2">
                       {CLINIC_SERVICES.map((service, index) => (
@@ -212,7 +210,7 @@ export default function BookingPage() {
                           {service.title}
                           {index === suggestedIdx && (
                             <span className="ml-auto shrink-0 rounded-full bg-triage-p3-bg px-2 py-0.5 text-xs font-semibold text-triage-p3">
-                              Suggested
+                              Đề xuất
                             </span>
                           )}
                         </button>
@@ -222,7 +220,7 @@ export default function BookingPage() {
 
                   <div>
                     <p className="mb-3 text-base font-medium text-slate-900">
-                      Pick a time slot today
+                      Chọn khung giờ khám hôm nay
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {TIME_SLOTS.map((slot) => (
@@ -247,18 +245,47 @@ export default function BookingPage() {
 
               {step === 2 && (
                 <div className="space-y-5">
+                  {ocrData && (
+                    <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
+                      <p className="text-sm font-semibold text-teal-800">
+                        BHYT Đã xác thực - thông tin đã được tự động điền từ thẻ
+                        BHYT
+                      </p>
+                      <dl className="mt-2 space-y-1 text-sm text-slate-600">
+                        <div className="flex justify-between gap-3">
+                          <dt className="text-slate-500">Mã thẻ BHYT</dt>
+                          <dd className="font-mono font-medium text-slate-800">
+                            {ocrData.insuranceCode}
+                          </dd>
+                        </div>
+                        <div className="flex justify-between gap-3">
+                          <dt className="text-slate-500">Ngày sinh</dt>
+                          <dd className="font-medium text-slate-800">
+                            {ocrData.dateOfBirth}
+                          </dd>
+                        </div>
+                        <div className="flex justify-between gap-3">
+                          <dt className="text-slate-500">Nơi KCB ban đầu</dt>
+                          <dd className="font-medium text-slate-800">
+                            {ocrData.initialHospitalCode}
+                          </dd>
+                        </div>
+                      </dl>
+                    </div>
+                  )}
+
                   <div>
                     <label
                       htmlFor="booking-name"
                       className="mb-1.5 block text-base font-medium text-slate-900"
                     >
-                      Full Name
+                      Họ và Tên
                     </label>
                     <input
                       id="booking-name"
                       type="text"
                       autoComplete="name"
-                      placeholder="Your full name"
+                      placeholder="Họ và tên của bạn"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       className={inputBase}
@@ -270,13 +297,13 @@ export default function BookingPage() {
                       htmlFor="booking-phone"
                       className="mb-1.5 block text-base font-medium text-slate-900"
                     >
-                      Phone Number
+                      Số điện thoại
                     </label>
                     <input
                       id="booking-phone"
                       type="tel"
                       autoComplete="tel"
-                      placeholder="e.g. 09xx xxx xxx"
+                      placeholder="Ví dụ: 09xx xxx xxx"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className={inputBase}
@@ -285,33 +312,33 @@ export default function BookingPage() {
 
                   <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold text-slate-900">
-                      Booking Summary
+                      Tóm tắt lịch hẹn
                     </p>
                     <dl className="mt-2 space-y-1.5 text-base text-slate-600">
                       <div className="flex justify-between">
-                        <dt>Department</dt>
+                        <dt>Chuyên khoa</dt>
                         <dd className="font-medium text-slate-900">
                           {deptIdx !== null
                             ? CLINIC_SERVICES[deptIdx].title
-                            : "General Consultation"}
+                            : "Khám Nội Tổng quát & Tầm soát"}
                         </dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt>Time slot</dt>
+                        <dt>Khung giờ</dt>
                         <dd className="font-medium text-slate-900">
                           {timeSlot}
                         </dd>
                       </div>
                       <div className="flex justify-between">
-                        <dt>Upfront payment</dt>
-                        <dd className="font-medium text-slate-900">None</dd>
+                        <dt>Thanh toán trước</dt>
+                        <dd className="font-medium text-slate-900">Không</dd>
                       </div>
                     </dl>
                   </div>
 
                   <p className="inline-flex items-center gap-2 text-base font-medium text-slate-600">
                     <PhoneCall className="h-5 w-5 text-clinical-600" />
-                    Need help? Call us on (028) 1900-xxxx
+                    Cần hỗ trợ? Gọi tổng đài (028) 1900 123 456
                   </p>
                 </div>
               )}
@@ -325,7 +352,7 @@ export default function BookingPage() {
                     className="inline-flex h-11 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-5 text-base font-medium text-slate-700 transition-colors hover:bg-slate-50"
                   >
                     <ChevronLeft className="h-4 w-4" />
-                    Back
+                    Quay lại
                   </button>
 
                   <button
@@ -336,7 +363,7 @@ export default function BookingPage() {
                         : "bg-clinical-600 hover:bg-clinical-700"
                     }`}
                   >
-                    {step === 2 ? "Confirm Appointment" : "Continue"}
+                    {step === 2 ? "Xác nhận lịch hẹn" : "Tiếp tục"}
                   </button>
                 </div>
               )}
@@ -346,6 +373,14 @@ export default function BookingPage() {
       </main>
 
       <PatientFooter />
+      <FloatingRagChatbot />
+
+      {ticket && (
+        <BookingTicketModal
+          appointment={ticket}
+          onClose={resetBooking}
+        />
+      )}
     </div>
   );
 }

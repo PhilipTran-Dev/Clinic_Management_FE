@@ -54,9 +54,15 @@ export default {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.4' },
         },
+        'laser-scan': {
+          '0%': { top: '4%' },
+          '50%': { top: '92%' },
+          '100%': { top: '4%' },
+        },
       },
       animation: {
         'pulse-dot': 'pulse-dot 1.5s ease-in-out infinite',
+        'laser-scan': 'laser-scan 1.6s ease-in-out infinite',
       },
     },
   },

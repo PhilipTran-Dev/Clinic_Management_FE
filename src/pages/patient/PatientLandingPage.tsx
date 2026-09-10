@@ -9,6 +9,7 @@ import ClinicFacility from "./components/ClinicFacility";
 import ClinicalFaq from "./components/ClinicalFaq";
 import PatientFooter from "./components/PatientFooter";
 import MobileFloatingBar from "./components/MobileFloatingBar";
+import FloatingRagChatbot from "./components/FloatingRagChatbot";
 
 export default function PatientLandingPage() {
   return (
@@ -26,6 +27,7 @@ export default function PatientLandingPage() {
       </main>
       <PatientFooter />
       <MobileFloatingBar />
+      <FloatingRagChatbot />
     </div>
   );
 }

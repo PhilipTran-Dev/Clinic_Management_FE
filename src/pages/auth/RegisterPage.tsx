@@ -23,22 +23,22 @@ export default function RegisterPage() {
   function validate(): boolean {
     const next: Record<string, string> = {};
 
-    if (!fullName.trim()) next.fullName = "Full name is required.";
-    if (!phone.trim()) next.phone = "Phone number is required.";
+    if (!fullName.trim()) next.fullName = "Vui lòng nhập họ và tên.";
+    if (!phone.trim()) next.phone = "Vui lòng nhập số điện thoại hợp lệ.";
     if (!email.trim()) {
-      next.email = "Email is required.";
+      next.email = "Vui lòng nhập email hợp lệ.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      next.email = "Enter a valid email address.";
+      next.email = "Vui lòng nhập email hợp lệ.";
     }
     if (!password) {
-      next.password = "Password is required.";
+      next.password = "Vui lòng nhập mật khẩu.";
     } else if (password.length < 8) {
-      next.password = "Password must be at least 8 characters.";
+      next.password = "Mật khẩu phải có tối thiểu 8 ký tự.";
     }
     if (!confirmPassword) {
-      next.confirmPassword = "Please confirm your password.";
+      next.confirmPassword = "Vui lòng xác nhận lại mật khẩu.";
     } else if (password !== confirmPassword) {
-      next.confirmPassword = "Passwords do not match.";
+      next.confirmPassword = "Mật khẩu xác nhận không khớp.";
     }
 
     setErrors(next);
@@ -61,10 +61,14 @@ export default function RegisterPage() {
         dateOfBirth: dob || undefined,
         gender: (gender as Gender) || undefined,
       });
-      toast.success(`Welcome, ${user.fullName}. Your account has been created.`);
+      toast.success(
+        `Chào mừng ${user.fullName}. Tài khoản đã được tạo thành công.`,
+      );
       navigate("/patient/dashboard");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Registration failed.");
+      toast.error(
+        err instanceof Error ? err.message : "Đăng ký không thành công. Vui lòng thử lại.",
+      );
     } finally {
       setLoading(false);
     }
@@ -83,10 +87,11 @@ export default function RegisterPage() {
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-          Create your account
+          Tạo tài khoản Bệnh nhân
         </h2>
         <p className="mt-1.5 text-sm text-slate-500">
-          Register as a patient to book appointments and manage your health records.
+          Đăng ký tài khoản để chủ động đặt lịch khám và tra cứu hồ sơ bệnh án
+          điện tử.
         </p>
       </div>
 
@@ -95,12 +100,12 @@ export default function RegisterPage() {
         <Info className="mt-0.5 h-5 w-5 shrink-0 text-clinical-600" />
         <div>
           <p className="text-sm font-medium text-slate-900">
-            Healthcare professionals
+            Dành cho Nhân viên y tế
           </p>
           <p className="mt-0.5 text-xs leading-relaxed text-slate-500">
-            Doctors, Pharmacists, and Admins are provisioned internally by the
-            Clinic Administrator. Contact your department lead to receive access
-            credentials.
+            Tài khoản Bác sĩ, Dược sĩ và Quản trị viên được tạo và phân quyền
+            nội bộ bởi Quản trị viên hệ thống. Vui lòng liên hệ bộ phận CNTT
+            của phòng khám để nhận tài khoản công tác.
           </p>
         </div>
       </div>
@@ -110,7 +115,7 @@ export default function RegisterPage() {
         {/* Full Name */}
         <div>
           <label htmlFor="reg-name" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Full Name
+            Họ và tên
           </label>
           <div className="relative">
             <User className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -118,7 +123,7 @@ export default function RegisterPage() {
               id="reg-name"
               type="text"
               autoComplete="name"
-              placeholder="Jane Doe"
+              placeholder="Nguyễn Văn An"
               value={fullName}
               onChange={(e) => { setFullName(e.target.value); setErrors((p) => { const n = { ...p }; delete n.fullName; return n; }); }}
               className={fieldClass("fullName")}
@@ -130,7 +135,7 @@ export default function RegisterPage() {
         {/* Phone */}
         <div>
           <label htmlFor="reg-phone" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Phone Number
+            Số điện thoại liên hệ
           </label>
           <div className="relative">
             <Phone className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -138,7 +143,7 @@ export default function RegisterPage() {
               id="reg-phone"
               type="tel"
               autoComplete="tel"
-              placeholder="+1 (555) 000-0000"
+              placeholder="0912 345 678"
               value={phone}
               onChange={(e) => { setPhone(e.target.value); setErrors((p) => { const n = { ...p }; delete n.phone; return n; }); }}
               className={fieldClass("phone")}
@@ -151,7 +156,7 @@ export default function RegisterPage() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="reg-dob" className="mb-1.5 block text-sm font-medium text-slate-700">
-              Date of Birth
+              Ngày sinh
             </label>
             <input
               id="reg-dob"
@@ -163,7 +168,7 @@ export default function RegisterPage() {
           </div>
           <div>
             <label htmlFor="reg-gender" className="mb-1.5 block text-sm font-medium text-slate-700">
-              Gender
+              Giới tính
             </label>
             <select
               id="reg-gender"
@@ -171,10 +176,10 @@ export default function RegisterPage() {
               onChange={(e) => setGender(e.target.value as Gender | "")}
               className="h-11 w-full appearance-none rounded-lg border border-slate-200 bg-white px-4 text-sm text-slate-900 transition-colors focus:border-clinical-600 focus:outline-none focus:ring-2 focus:ring-clinical-500/20"
             >
-              <option value="">Select</option>
-              <option value="MALE">Male</option>
-              <option value="FEMALE">Female</option>
-              <option value="OTHER">Other</option>
+              <option value="">Chọn giới tính</option>
+              <option value="MALE">Nam</option>
+              <option value="FEMALE">Nữ</option>
+              <option value="OTHER">Khác</option>
             </select>
           </div>
         </div>
@@ -182,7 +187,7 @@ export default function RegisterPage() {
         {/* Email */}
         <div>
           <label htmlFor="reg-email" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Email Address
+            Địa chỉ Email
           </label>
           <div className="relative">
             <Mail className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -190,7 +195,7 @@ export default function RegisterPage() {
               id="reg-email"
               type="email"
               autoComplete="email"
-              placeholder="you@example.com"
+              placeholder="nguyenvanan@gmail.com"
               value={email}
               onChange={(e) => { setEmail(e.target.value); setErrors((p) => { const n = { ...p }; delete n.email; return n; }); }}
               className={fieldClass("email")}
@@ -202,7 +207,7 @@ export default function RegisterPage() {
         {/* Password */}
         <div>
           <label htmlFor="reg-password" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Password
+            Mật khẩu
           </label>
           <div className="relative">
             <Lock className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -210,7 +215,7 @@ export default function RegisterPage() {
               id="reg-password"
               type="password"
               autoComplete="new-password"
-              placeholder="At least 8 characters"
+              placeholder="Tối thiểu 8 ký tự"
               value={password}
               onChange={(e) => { setPassword(e.target.value); setErrors((p) => { const n = { ...p }; delete n.password; return n; }); }}
               className={fieldClass("password")}
@@ -222,7 +227,7 @@ export default function RegisterPage() {
         {/* Confirm Password */}
         <div>
           <label htmlFor="reg-confirm" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Confirm Password
+            Xác nhận mật khẩu
           </label>
           <div className="relative">
             <Lock className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -230,7 +235,7 @@ export default function RegisterPage() {
               id="reg-confirm"
               type="password"
               autoComplete="new-password"
-              placeholder="Re-enter your password"
+              placeholder="Nhập lại mật khẩu vừa tạo"
               value={confirmPassword}
               onChange={(e) => { setConfirmPassword(e.target.value); setErrors((p) => { const n = { ...p }; delete n.confirmPassword; return n; }); }}
               className={fieldClass("confirmPassword")}
@@ -247,15 +252,15 @@ export default function RegisterPage() {
           disabled={loading}
           className="flex h-11 w-full items-center justify-center rounded-lg bg-clinical-600 px-5 text-sm font-semibold text-white shadow-card transition-all hover:bg-clinical-700 hover:shadow-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600 disabled:opacity-50"
         >
-          {loading ? "Creating account..." : "Create Account"}
+          {loading ? "Đang xử lý tạo tài khoản..." : "Tạo tài khoản"}
         </button>
       </form>
 
       {/* Footer link */}
       <p className="text-center text-sm text-slate-500">
-        Already have an account?{" "}
+        Đã có tài khoản?{" "}
         <Link to="/login" className="font-medium text-cta transition-colors hover:text-cta-hover">
-          Sign In
+          Đăng nhập
         </Link>
       </p>
     </div>

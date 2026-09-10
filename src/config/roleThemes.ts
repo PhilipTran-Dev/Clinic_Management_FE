@@ -16,7 +16,7 @@ export const ROLE_THEMES: Record<UserRole, RoleTheme> = {
     button: "bg-sky-600 hover:bg-sky-700",
     focusClasses: "focus:ring-sky-500/20 focus:border-sky-600",
     badge: "bg-sky-100 text-sky-800 border-sky-200",
-    portalLabel: "Patient",
+    portalLabel: "Cổng Bệnh nhân",
   },
   DOCTOR: {
     heroBg: "bg-teal-700",
@@ -24,7 +24,7 @@ export const ROLE_THEMES: Record<UserRole, RoleTheme> = {
     button: "bg-teal-600 hover:bg-teal-700",
     focusClasses: "focus:ring-teal-500/20 focus:border-teal-600",
     badge: "bg-teal-100 text-teal-800 border-teal-200",
-    portalLabel: "Doctor EHR",
+    portalLabel: "Bác sĩ (EHR)",
   },
   PHARMACIST: {
     heroBg: "bg-emerald-700",
@@ -32,7 +32,7 @@ export const ROLE_THEMES: Record<UserRole, RoleTheme> = {
     button: "bg-emerald-600 hover:bg-emerald-700",
     focusClasses: "focus:ring-emerald-500/20 focus:border-emerald-600",
     badge: "bg-emerald-100 text-emerald-800 border-emerald-200",
-    portalLabel: "Pharmacy",
+    portalLabel: "Quầy Dược",
   },
   ADMIN: {
     heroBg: "bg-slate-800",
@@ -40,7 +40,7 @@ export const ROLE_THEMES: Record<UserRole, RoleTheme> = {
     button: "bg-slate-800 hover:bg-slate-900",
     focusClasses: "focus:ring-slate-500/20 focus:border-slate-700",
     badge: "bg-slate-100 text-slate-800 border-slate-300",
-    portalLabel: "Admin",
+    portalLabel: "Quản trị viên",
   },
 };
 

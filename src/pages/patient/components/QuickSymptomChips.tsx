@@ -8,25 +8,25 @@ interface SymptomChip {
 }
 
 const SYMPTOM_CHIPS: SymptomChip[] = [
-  { id: "fever", label: "Fever & Chills", emoji: "🌡️", value: "Fever and chills" },
-  { id: "sore-throat", label: "Sore Throat", emoji: "🗣️", value: "Sore throat" },
+  { id: "fever", label: "Sốt & ớn lạnh", emoji: "🌡️", value: "Sốt và ớn lạnh" },
+  { id: "sore-throat", label: "Đau rát họng", emoji: "🗣️", value: "Đau rát họng" },
   {
     id: "cough",
-    label: "Persistent Cough",
+    label: "Ho kéo dài",
     emoji: "🫁",
-    value: "Persistent cough",
+    value: "Ho kéo dài",
   },
   {
     id: "rash",
-    label: "Itchy Skin Rash",
+    label: "Nổi mẩn ngứa",
     emoji: "🩹",
-    value: "Itchy skin rash",
+    value: "Nổi mẩn ngứa trên da",
   },
   {
     id: "stomach",
-    label: "Abdominal Pain / Nausea",
+    label: "Đau bụng / buồn nôn",
     emoji: "🤢",
-    value: "Abdominal pain and nausea",
+    value: "Đau bụng và buồn nôn",
   },
 ];
 
@@ -36,7 +36,7 @@ interface QuickSymptomChipsProps {
 
 export default function QuickSymptomChips({ onSelect }: QuickSymptomChipsProps) {
   return (
-    <div className="flex flex-wrap gap-2" aria-label="Quick symptom tags">
+    <div className="flex flex-wrap gap-2" aria-label="Chọn triệu chứng nhanh">
       {SYMPTOM_CHIPS.map((chip) => (
         <button
           key={chip.id}

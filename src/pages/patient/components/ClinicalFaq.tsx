@@ -10,13 +10,13 @@ export default function ClinicalFaq() {
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            FAQ
+            Hỏi đáp FAQ
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Common Clinic Questions
+            Các Câu Hỏi Thường Gặp
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-500">
-            Straight answers about your privacy, bookings, and payments.
+            Giải đáp trực tiếp về bảo mật, đặt lịch và thanh toán của bạn.
           </p>
         </div>
 

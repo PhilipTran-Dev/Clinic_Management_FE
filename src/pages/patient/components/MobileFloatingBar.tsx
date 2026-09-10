@@ -7,7 +7,7 @@ export default function MobileFloatingBar() {
       <div className="flex items-center gap-3">
         <a
           href="tel:1900 123 456"
-          aria-label="Call the clinic"
+          aria-label="Gọi phòng khám"
           className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-slate-200 bg-white text-clinical-600 transition-colors hover:bg-slate-50"
         >
           <Phone className="h-5 w-5" />
@@ -17,7 +17,7 @@ export default function MobileFloatingBar() {
           className="flex h-12 flex-1 items-center justify-center gap-2 rounded-lg bg-cta text-base font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
         >
           <Calendar className="h-4 w-4" />
-          Book Appointment
+          Đặt lịch khám ngay
         </Link>
       </div>
     </div>

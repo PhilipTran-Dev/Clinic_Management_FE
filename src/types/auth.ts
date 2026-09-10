@@ -38,30 +38,30 @@ export interface DemoAccount {
 
 export const DEMO_ACCOUNTS: DemoAccount[] = [
   {
-    label: "Patient",
+    label: "Bệnh nhân",
     role: "PATIENT",
-    email: "patient@clinic.com",
+    email: "patient@clinic.vn",
     password: "Demo@1234",
     redirectPath: "/patient/dashboard",
   },
   {
-    label: "Doctor",
+    label: "Bác sĩ",
     role: "DOCTOR",
-    email: "doctor.tran@clinic.com",
+    email: "doctor.tran@clinic.vn",
     password: "Demo@1234",
     redirectPath: "/doctor/ehr",
   },
   {
-    label: "Pharmacist",
+    label: "Dược sĩ",
     role: "PHARMACIST",
-    email: "pharmacy@clinic.com",
+    email: "pharmacy@clinic.vn",
     password: "Demo@1234",
     redirectPath: "/pharmacy/queue",
   },
   {
-    label: "Admin",
+    label: "Quản trị viên",
     role: "ADMIN",
-    email: "admin@clinic.com",
+    email: "admin@clinic.vn",
     password: "Demo@1234",
     redirectPath: "/admin/overview",
   },

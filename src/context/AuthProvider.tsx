@@ -28,19 +28,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(
     async (credentials: LoginCredentials, role: UserRole): Promise<User> => {
       if (!credentials.email || !credentials.password) {
-        throw new Error("Email and password are required.");
+        throw new Error("Email và mật khẩu là bắt buộc.");
       }
 
       const mockUser: User = {
         id: crypto.randomUUID(),
         email: credentials.email,
         fullName: role === "PATIENT"
-          ? "Jane Patient"
+          ? "Nguyễn Văn An"
           : role === "DOCTOR"
-            ? "Dr. Sarah Chen"
+            ? "PGS. TS. BS. Trần Minh Tuấn"
             : role === "PHARMACIST"
-              ? "Mark Rivera"
-              : "Admin User",
+              ? "DS. Đặng Thu Thảo"
+              : "Quản trị viên Hệ thống",
         role,
         token: `mock_jwt_${role.toLowerCase()}_${Date.now()}`,
       };
@@ -55,7 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const register = useCallback(
     async (payload: RegisterPayload): Promise<User> => {
       if (payload.password !== payload.confirmPassword) {
-        throw new Error("Passwords do not match.");
+        throw new Error("Mật khẩu xác nhận không khớp.");
       }
 
       const mockUser: User = {

@@ -52,14 +52,14 @@ export default function LoginPage() {
   function validate(): boolean {
     const next: typeof errors = {};
     if (!email.trim()) {
-      next.email = "Email is required.";
+      next.email = "Vui lòng nhập địa chỉ email.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      next.email = "Enter a valid email address.";
+      next.email = "Địa chỉ email không đúng định dạng.";
     }
     if (!password) {
-      next.password = "Password is required.";
+      next.password = "Vui lòng nhập mật khẩu.";
     } else if (password.length < 6) {
-      next.password = "Password must be at least 6 characters.";
+      next.password = "Mật khẩu phải có tối thiểu 6 ký tự.";
     }
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -82,10 +82,12 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const user = await login({ email, password }, activeRole);
-      toast.success(`Welcome back, ${user.fullName}`);
+      toast.success(`Chào mừng trở lại, ${user.fullName}`);
       navigate(redirectFor(activeRole));
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Login failed.");
+      toast.error(
+        err instanceof Error ? err.message : "Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin.",
+      );
     } finally {
       setLoading(false);
     }
@@ -97,14 +99,18 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const user = await login(
+      await login(
         { email: account.email, password: account.password },
         activeRole,
       );
-      toast.success(`Signed in with Google as ${user.fullName} (${theme.portalLabel})`);
+      toast.success(
+        `Đăng nhập Google thành công với vai trò ${theme.portalLabel}`,
+      );
       navigate(account.redirectPath);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Google sign-in failed.");
+      toast.error(
+        err instanceof Error ? err.message : "Đăng nhập Google không thành công.",
+      );
     } finally {
       setLoading(false);
     }
@@ -122,21 +128,21 @@ export default function LoginPage() {
       <div>
         <div className="mb-3">
           <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors duration-300 ease-in-out ${theme.badge}`}>
-            {theme.portalLabel} Portal Mode
+            {theme.portalLabel}
           </span>
         </div>
         <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-          Sign in to your account
+          Đăng nhập hệ thống
         </h2>
         <p className="mt-1.5 text-sm text-slate-500">
-          Enter your credentials to access the clinical dashboard.
+          Nhập thông tin tài khoản để truy cập vào hệ thống phòng khám.
         </p>
       </div>
 
       {/* Quick Demo Sign-in */}
       <div className="rounded-xl border border-slate-200/80 bg-white p-4 shadow-card">
         <p className="mb-3 text-xs font-medium text-slate-500">
-          Quick Demo Sign-in
+          Đăng nhập nhanh tài khoản mẫu (Demo)
         </p>
         <div className="flex flex-wrap gap-2">
           {DEMO_ACCOUNTS.map((account) => {
@@ -168,7 +174,7 @@ export default function LoginPage() {
         className="flex h-11 w-full items-center justify-center gap-3 rounded-lg border border-slate-200/90 bg-white px-5 text-sm font-medium text-slate-700 shadow-card transition-colors duration-300 ease-in-out hover:bg-slate-50 hover:shadow-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-400 disabled:opacity-50"
       >
         <GoogleIcon />
-        Continue with Google
+        Tiếp tục với Google
       </button>
 
       {/* Divider */}
@@ -178,7 +184,7 @@ export default function LoginPage() {
         </div>
         <div className="relative flex justify-center text-xs">
           <span className="bg-surface-light px-3 text-slate-400">
-            or continue with email
+            hoặc đăng nhập bằng email
           </span>
         </div>
       </div>
@@ -188,7 +194,7 @@ export default function LoginPage() {
         {/* Email */}
         <div>
           <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Email Address
+            Địa chỉ Email
           </label>
           <div className="relative">
             <Mail className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -196,7 +202,7 @@ export default function LoginPage() {
               id="email"
               type="email"
               autoComplete="email"
-              placeholder="you@clinic.com"
+              placeholder="bacsi@smartclinic.vn"
               value={email}
               onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: undefined })); }}
               className={`${inputBase} ${errors.email ? inputError : inputNormal}`}
@@ -208,7 +214,7 @@ export default function LoginPage() {
         {/* Password */}
         <div>
           <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-slate-700">
-            Password
+            Mật khẩu
           </label>
           <div className="relative">
             <Lock className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" />
@@ -216,7 +222,7 @@ export default function LoginPage() {
               id="password"
               type={showPassword ? "text" : "password"}
               autoComplete="current-password"
-              placeholder="Enter your password"
+              placeholder="Nhập mật khẩu của bạn"
               value={password}
               onChange={(e) => { setPassword(e.target.value); setErrors((p) => ({ ...p, password: undefined })); }}
               className={`${inputBase} pr-11 ${errors.password ? inputError : inputNormal}`}
@@ -225,7 +231,7 @@ export default function LoginPage() {
               type="button"
               onClick={() => setShowPassword((s) => !s)}
               className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-0.5 text-slate-400 transition-colors hover:text-slate-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600"
-              aria-label={showPassword ? "Hide password" : "Show password"}
+              aria-label={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -242,13 +248,13 @@ export default function LoginPage() {
               onChange={(e) => setRemember(e.target.checked)}
               className="h-4 w-4 rounded border-slate-300 text-clinical-600 focus:ring-clinical-500"
             />
-            Remember me
+            Ghi nhớ đăng nhập
           </label>
           <Link
             to="#"
             className="text-sm font-medium text-cta transition-colors hover:text-cta-hover"
           >
-            Forgot password?
+            Quên mật khẩu?
           </Link>
         </div>
 
@@ -258,15 +264,15 @@ export default function LoginPage() {
           disabled={loading}
           className={`flex h-11 w-full items-center justify-center rounded-lg px-5 text-sm font-semibold text-white shadow-card transition-colors duration-300 ease-in-out hover:shadow-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clinical-600 disabled:opacity-50 ${theme.button}`}
         >
-          {loading ? "Signing in..." : "Sign In"}
+          {loading ? "Đang xác thực..." : "Đăng nhập"}
         </button>
       </form>
 
       {/* Footer link */}
       <p className="text-center text-sm text-slate-500">
-        Don&apos;t have an account?{" "}
+        Chưa có tài khoản?{" "}
         <Link to="/register" className="font-medium text-cta transition-colors hover:text-cta-hover">
-          Create Account
+          Đăng ký ngay
         </Link>
       </p>
     </div>

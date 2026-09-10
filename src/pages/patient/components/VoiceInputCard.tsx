@@ -57,7 +57,7 @@ export default function VoiceInputCard({
 
   useEffect(() => {
     if (error === SIMULATION_MESSAGE) {
-      toast.info(SIMULATION_MESSAGE);
+      toast.info("Thiết bị chưa cấp quyền micro. Đang kích hoạt mô phỏng giọng nói.");
     }
   }, [error]);
 
@@ -106,12 +106,11 @@ export default function VoiceInputCard({
           htmlFor="booking-symptoms"
           className="text-lg font-semibold text-slate-900"
         >
-          What brings you in today?
+          Lý do bạn đến khám hôm nay là gì?
         </label>
       </div>
       <p className="mt-2 text-base leading-relaxed text-slate-500">
-        Describe how you are feeling in your own words, or tap the microphone
-        to speak.
+        Mô tả tình trạng của bạn theo lời nói, hoặc chạm micro để ghi âm.
       </p>
 
       {/* Textarea */}
@@ -121,7 +120,7 @@ export default function VoiceInputCard({
         value={liveValue}
         onChange={(e) => onChange(e.target.value)}
         readOnly={isListening}
-        placeholder="e.g. I've had an itchy rash on my arms for the past week..."
+        placeholder="Ví dụ: Tôi bị nổi mẩn ngứa ở tay một tuần nay, kèm hắt hơi nhiều lúc sáng..."
         className="mt-4 min-h-[160px] w-full rounded-lg border border-slate-200 bg-white p-4 text-base leading-relaxed text-slate-800 placeholder:text-slate-400 transition-colors outline-none focus:border-clinical-600 focus:ring-2 focus:ring-clinical-500/20 md:text-lg"
       />
 
@@ -151,7 +150,7 @@ export default function VoiceInputCard({
           </span>
 
           <span className="text-base font-medium text-slate-900">
-            {isFallback ? "Simulating dictation..." : "Listening..."}
+            {isFallback ? "Đang mô phỏng lời nói..." : "Đang lắng nghe..."}
           </span>
           <span className="tabular-nums text-base font-semibold text-clinical-700">
             {formatDuration(recordingTime)}
@@ -164,7 +163,7 @@ export default function VoiceInputCard({
               className="inline-flex h-12 items-center gap-1.5 rounded-lg bg-clinical-600 px-4 text-base font-medium text-white transition-colors hover:bg-clinical-700"
             >
               <Square className="h-4 w-4" aria-hidden="true" />
-              Done
+              Xong
             </button>
             <button
               type="button"
@@ -172,7 +171,7 @@ export default function VoiceInputCard({
               className="inline-flex h-12 items-center gap-1.5 px-3 text-base font-medium text-slate-500 transition-colors hover:text-slate-700"
             >
               <MicOff className="h-4 w-4" aria-hidden="true" />
-              Cancel
+              Hủy
             </button>
           </span>
         </div>
@@ -187,12 +186,12 @@ export default function VoiceInputCard({
             className="inline-flex h-12 items-center gap-2 rounded-xl border border-clinical-200 bg-clinical-50 px-5 text-base font-medium text-clinical-700 shadow-sm transition-all hover:bg-clinical-100"
           >
             <Mic className="h-5 w-5" aria-hidden="true" />
-            Tap to Speak
+            Chạm để nói
           </button>
 
           <div
             role="group"
-            aria-label="Dictation language"
+            aria-label="Ngôn ngữ đọc lời nói"
             className="flex items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1"
           >
             {LANGS.map((item) => (
@@ -219,7 +218,7 @@ export default function VoiceInputCard({
               className="inline-flex h-12 items-center gap-1.5 rounded-xl px-4 text-base font-medium text-slate-500 transition-colors hover:text-slate-700"
             >
               <RotateCcw className="h-4 w-4" aria-hidden="true" />
-              Clear
+              Xóa nội dung
             </button>
           )}
         </div>
@@ -229,8 +228,8 @@ export default function VoiceInputCard({
       {!isSupported && !isListening && (
         <p className="mt-3 flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-500">
           <Volume2 className="h-4 w-4 shrink-0 text-clinical-600" />
-          Voice input is not available in this browser. You can type your
-          symptoms or use the quick symptom tags below.
+          Trình duyệt không hỗ trợ nhập liệu bằng giọng nói. Bạn có thể gõ
+          triệu chứng hoặc chọn các thẻ triệu chứng nhanh bên dưới.
         </p>
       )}
     </div>

@@ -1,0 +1,214 @@
+import { FileText } from "lucide-react";
+import { useState } from "react";
+import type {
+  PatientRecord,
+  TranscriptEntity,
+  TranscriptEntityType,
+  TranscriptLine,
+} from "../data/doctorMockData";
+import type { ConsultationStatus } from "../hooks/useAmbientConsultation";
+
+interface LiveTranscriptPanelProps {
+  status: ConsultationStatus;
+  revealedLines: TranscriptLine[];
+  patient: PatientRecord | null;
+}
+
+const ENTITY_STYLES: Record<
+  TranscriptEntityType,
+  { label: string; className: string }
+> = {
+  SYMPTOM: {
+    label: "Symptom",
+    className: "border-sky-200 bg-sky-50 text-sky-700",
+  },
+  DURATION: {
+    label: "Duration",
+    className: "border-slate-200 bg-slate-100 text-slate-700",
+  },
+  VITALS: {
+    label: "Vitals",
+    className: "border-red-200 bg-red-50 text-red-700",
+  },
+  ALLERGY: {
+    label: "Allergy",
+    className: "border-red-300 bg-red-50 text-red-700",
+  },
+};
+
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function highlightEntities(text: string, entities: TranscriptEntity[]) {
+  if (entities.length === 0) return <>{text}</>;
+  const pattern = new RegExp(
+    `(${entities.map((e) => escapeRegex(e.term)).join("|")})`,
+    "gi",
+  );
+  const parts = text.split(pattern);
+  return (
+    <>
+      {parts.map((part, index) => {
+        const match = entities.find(
+          (e) => e.term.toLowerCase() === part.toLowerCase(),
+        );
+        if (match) {
+          const style = ENTITY_STYLES[match.type];
+          return (
+            <mark
+              key={index}
+              className={`mx-0.5 rounded px-0.5 font-semibold ${style.className}`}
+            >
+              {part}
+            </mark>
+          );
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </>
+  );
+}
+
+type TranscriptTab = "LIVE" | "PREVIOUS";
+
+export default function LiveTranscriptPanel({
+  status,
+  revealedLines,
+  patient,
+}: LiveTranscriptPanelProps) {
+  const [tab, setTab] = useState<TranscriptTab>("LIVE");
+  const recording = status === "RECORDING" || status === "PAUSED";
+
+  return (
+    <div className="flex h-full flex-col">
+      {/* Tab switcher */}
+      <div className="flex items-center gap-1 border-b border-slate-200/80 px-3 py-2">
+        <button
+          type="button"
+          onClick={() => setTab("LIVE")}
+          className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+            tab === "LIVE"
+              ? "bg-teal-600 text-white"
+              : "text-slate-600 hover:bg-slate-100"
+          }`}
+        >
+          Live Audio Transcript {recording && <span className="ml-1 text-red-500">●</span>}
+        </button>
+        <button
+          type="button"
+          onClick={() => setTab("PREVIOUS")}
+          className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors ${
+            tab === "PREVIOUS"
+              ? "bg-teal-600 text-white"
+              : "text-slate-600 hover:bg-slate-100"
+          }`}
+        >
+          Previous Encounters &amp; Labs
+        </button>
+      </div>
+
+      {/* Live tab */}
+      {tab === "LIVE" && (
+        <div className="flex-1 space-y-3 overflow-y-auto p-3">
+          {revealedLines.length === 0 && (
+            <p className="px-2 py-8 text-center text-xs text-slate-400">
+              Start ambient recording to stream the live consultation
+              transcript with clinical entity tags.
+            </p>
+          )}
+          {revealedLines.map((line) => (
+            <div key={line.id} className="flex gap-2">
+              <span
+                className={`mt-0.5 h-fit shrink-0 rounded-md px-2 py-0.5 text-[11px] font-bold ${
+                  line.speaker === "DOCTOR"
+                    ? "bg-teal-600 text-white"
+                    : "bg-slate-100 text-slate-700"
+                }`}
+              >
+                {line.speaker === "DOCTOR" ? "Doctor" : "Patient"}
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="flex items-center justify-between">
+                  <span className="text-[11px] font-medium text-slate-400">
+                    {line.timeOffset}
+                  </span>
+                  <span className="flex flex-wrap gap-1">
+                    {line.entities.map((entity, index) => {
+                      const style = ENTITY_STYLES[entity.type];
+                      return (
+                        <span
+                          key={`${line.id}-${index}`}
+                          className={`rounded-full border px-1.5 py-0.5 text-[10px] font-semibold ${style.className}`}
+                        >
+                          [{style.label}: {entity.term}]
+                        </span>
+                      );
+                    })}
+                  </span>
+                </p>
+                <p className="mt-0.5 text-xs leading-relaxed text-slate-700">
+                  {highlightEntities(line.text, line.entities)}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Previous tab */}
+      {tab === "PREVIOUS" && patient && (
+        <div className="flex-1 overflow-y-auto p-3">
+          <div className="space-y-3">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-teal-700">
+                Historical Encounters ({patient.pastEncounters.length})
+              </p>
+              <div className="mt-1.5 space-y-2">
+                {patient.pastEncounters.map((encounter) => (
+                  <div
+                    key={encounter.id}
+                    className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card"
+                  >
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span className="font-mono">{encounter.id}</span>
+                      <span>{encounter.date}</span>
+                    </div>
+                    <p className="mt-1 text-xs font-semibold text-slate-900">
+                      {encounter.complaint}
+                    </p>
+                    <p className="text-xs font-medium text-teal-700">
+                      {encounter.diagnosis}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p className="flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wide text-teal-700">
+                <FileText className="h-3 w-3" />
+                Lab Reports ({patient.labReports.length})
+              </p>
+              <div className="mt-1.5 space-y-2">
+                {patient.labReports.map((lab) => (
+                  <div
+                    key={lab.id}
+                    className="rounded-lg border border-slate-200/80 bg-white p-3 shadow-card"
+                  >
+                    <p className="text-xs font-semibold text-slate-700">
+                      {lab.name}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {lab.result} &middot; {lab.date}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

@@ -6,14 +6,14 @@ export default function AiWorkflowSteps() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            A Simple 3-Step Visit
+            Quy trình khám 3 bước đơn giản
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            From Booking to Consultation in Three Steps
+            Từ Đặt Lịch Đến Thăm Khám Trong 3 Bước
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-500">
-            No paperwork and no confusing portals - just clear steps anyone can
-            follow.
+            Không giấy tờ, không cổng thông tin rối - chỉ những bước rõ ràng ai
+            cũng làm được.
           </p>
         </div>
 

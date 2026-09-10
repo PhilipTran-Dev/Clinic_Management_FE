@@ -4,18 +4,18 @@ import { CLINIC_FACILITY_IMAGE } from "../data/clinicContent";
 const FACILITY_DETAILS = [
   {
     icon: Clock,
-    label: "Opening Hours",
-    value: "Mon - Sun: 07:30 - 20:30",
+    label: "Giờ mở cửa",
+    value: "T2 - CN: 07:30 - 20:30",
   },
   {
     icon: Car,
-    label: "Parking",
-    value: "Free onsite parking at rear entrance",
+    label: "Bãi đỗ xe",
+    value: "Đỗ xe miễn phí tại bãi phía sau tòa nhà",
   },
   {
     icon: QrCode,
-    label: "Express Check-in",
-    value: "~5 min QR kiosk queue, then straight to your consultation room",
+    label: "Check-in nhanh",
+    value: "Xếp hàng quét QR chỉ ~5 phút, sau đó đến thẳng phòng khám",
   },
 ];
 
@@ -38,15 +38,15 @@ export default function ClinicFacility() {
         {/* Content */}
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            Walk-In Ready
+            Hạ tầng hiện đại
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            A Modern, Accredited Facility
+            Cơ Sở Khám Chữa Bệnh Hiện Đại, Đạt Chuẩn
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
-            Our clinics are designed to feel calm, clean, and easy to navigate.
-            At peak times, the express QR kiosk keeps your wait to just a few
-            minutes from the front door to the consultation room.
+            Các phòng khám của chúng tôi được thiết kế hiện đại, sạch sẽ và dễ
+            di chuyển. Vào giờ cao điểm, quầy kiosk QR giúp rút ngắn thời gian
+            chờ xuống chỉ vài phút từ cửa vào đến phòng khám.
           </p>
 
           <ul className="mt-6 space-y-4">
@@ -72,7 +72,8 @@ export default function ClinicFacility() {
 
           <p className="mt-6 inline-flex items-center gap-2 text-base font-medium text-slate-600">
             <MapPin className="h-5 w-5 text-clinical-600" />
-            All branches accept walk-ins throughout opening hours.
+            Tất cả các cơ sở tiếp nhận bệnh nhân vãng lai trong suốt giờ mở
+            cửa.
           </p>
         </div>
       </div>

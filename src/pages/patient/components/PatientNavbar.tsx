@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Activity, ChevronDown, Clock, MapPin, PhoneCall } from "lucide-react";
+import { Activity, ChevronDown, Clock, MapPin, PhoneCall, QrCode } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Doctors", href: "#doctors" },
-  { label: "Locations", href: "#locations" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Chuyên khoa", href: "#services" },
+  { label: "Quy trình khám", href: "#how-it-works" },
+  { label: "Đội ngũ Bác sĩ", href: "#doctors" },
+  { label: "Cơ sở phòng khám", href: "#locations" },
+  { label: "Hỏi đáp FAQ", href: "#faq" },
 ];
 
 export default function PatientNavbar() {
@@ -20,12 +20,12 @@ export default function PatientNavbar() {
             className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-clinical-700"
           >
             <PhoneCall className="h-3.5 w-3.5 text-clinical-600" />
-            Emergency Call: 1900 123 456
+            Cấp cứu &amp; Tư vấn: 1900 123 456
           </a>
           <div className="flex items-center gap-5">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-3.5 w-3.5 text-slate-500" />
-              Mon - Sun: 07:30 - 20:30
+              T2 - CN: 07:30 - 20:30
             </span>
             <span className="h-4 w-px bg-slate-300" />
             <button
@@ -33,7 +33,7 @@ export default function PatientNavbar() {
               className="inline-flex items-center gap-1 font-medium transition-colors hover:text-clinical-700"
             >
               <MapPin className="h-3.5 w-3.5 text-slate-500" />
-              Adelaide Central
+              Cơ sở Cầu Giấy (Hà Nội)
               <ChevronDown className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -66,16 +66,23 @@ export default function PatientNavbar() {
 
           <div className="flex items-center gap-3">
             <Link
+              to="/patient/dashboard"
+              className="hidden h-10 items-center justify-center gap-1.5 rounded-lg border border-slate-200 px-4 text-sm font-medium text-slate-700 transition-colors hover:text-clinical-700 md:inline-flex"
+            >
+              <QrCode className="h-4 w-4 text-clinical-600" aria-hidden="true" />
+              Vé của tôi
+            </Link>
+            <Link
               to="/login?role=PATIENT"
               className="hidden h-10 items-center justify-center rounded-lg border border-slate-200 px-4 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 md:inline-flex"
             >
-              Patient Portal Login
+              Cổng Bệnh nhân (Đăng nhập)
             </Link>
             <Link
               to="/patient/booking"
               className="inline-flex h-11 items-center justify-center rounded-lg bg-cta px-5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-cta-hover"
             >
-              Book Appointment
+              Đặt lịch khám ngay
             </Link>
           </div>
         </div>

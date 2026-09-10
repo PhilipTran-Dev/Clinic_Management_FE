@@ -7,9 +7,9 @@ import type { StaffMember } from "../data/clinicContent";
 type RoleFilter = "ALL" | "DOCTOR" | "NURSE";
 
 const FILTERS: { key: RoleFilter; label: string }[] = [
-  { key: "ALL", label: "All Care Team" },
-  { key: "DOCTOR", label: "Specialist Physicians" },
-  { key: "NURSE", label: "Clinical Nurses & Triage" },
+  { key: "ALL", label: "Toàn đội ngũ" },
+  { key: "DOCTOR", label: "Bác sĩ chuyên khoa" },
+  { key: "NURSE", label: "Điều dưỡng lâm sàng" },
 ];
 
 export default function MedicalStaffSection() {
@@ -26,14 +26,14 @@ export default function MedicalStaffSection() {
         {/* Header */}
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            Our Medical Specialists
+            Đội ngũ y bác sĩ
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Meet the Care Team
+            Gặp Gỡ Đội Ngũ Chăm Sóc
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-600">
-            Board-certified physicians and clinical nurses, ready to support you
-            today with direct consultation lines and same-day availability.
+            Đội ngũ bác sĩ chuyên khoa và điều dưỡng lâm sàng, sẵn sàng hỗ trợ
+            bạn hôm nay với quy trình khám chuẩn hóa và lịch khám linh hoạt.
           </p>
         </div>
 
@@ -107,12 +107,12 @@ function StaffCard({ staff }: { staff: StaffMember }) {
             isDoctor ? "bg-clinical-600" : "bg-teal-600"
           }`}
         >
-          {isDoctor ? "Physician" : "Clinical Nurse"}
+          {isDoctor ? "Bác sĩ" : "Điều dưỡng lâm sàng"}
         </span>
         {staff.availableToday && (
           <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50/90 px-2.5 py-0.5 text-xs font-medium text-emerald-700 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-            Available Today
+            Nhận khám hôm nay
           </span>
         )}
       </div>
@@ -126,9 +126,9 @@ function StaffCard({ staff }: { staff: StaffMember }) {
           {staff.title}
         </p>
         <p className="mt-1 flex items-center gap-2 text-xs font-medium text-slate-500">
-          <span>Age: {staff.age}</span>
+          <span>Tuổi: {staff.age}</span>
           <span aria-hidden="true">&bull;</span>
-          <span>{staff.experienceYears} yrs experience</span>
+          <span>{staff.experienceYears} năm kinh nghiệm</span>
         </p>
         <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-clinical-600">
           {staff.department}
@@ -167,7 +167,7 @@ function StaffCard({ staff }: { staff: StaffMember }) {
             className="mt-4 flex items-center justify-center gap-2 rounded-lg bg-cta px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-cta-hover"
           >
             <Calendar className="h-4 w-4" aria-hidden="true" />
-            Book Consultation
+            Đặt lịch khám
           </Link>
         ) : (
           <a
@@ -175,7 +175,7 @@ function StaffCard({ staff }: { staff: StaffMember }) {
             className="mt-4 flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-200"
           >
             <Phone className="h-3.5 w-3.5 text-clinical-600" aria-hidden="true" />
-            Direct Inquiries
+            Liên hệ trực tiếp
           </a>
         )}
       </div>

@@ -8,14 +8,15 @@ export default function ClinicalServices() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-wider text-clinical-600">
-            Clinical Services
+            Chuyên khoa khám
           </p>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Specialized Care Under One Roof
+            Chuyên sâu, Trọn Gói Trong Một Mái Nhà
           </h2>
           <p className="mt-3 text-base leading-relaxed text-slate-500">
-            Every consultation is coordinated digitally - from symptom intake to
-            e-prescription - so your clinician can focus on you.
+            Mọi quy trình khám đều được kết nối số hóa - từ tiếp nhận triệu
+            chứng đến đơn thuốc điện tử - giúp bác sĩ tập trung hoàn toàn vào
+            bạn.
           </p>
         </div>
 
@@ -44,7 +45,7 @@ export default function ClinicalServices() {
                   to="/patient/booking"
                   className="mt-4 inline-flex items-center gap-1 text-base font-medium text-clinical-600 transition-colors hover:text-clinical-700"
                 >
-                  Book Service
+                  Đặt lịch khám
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>

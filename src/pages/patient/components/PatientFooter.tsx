@@ -3,11 +3,11 @@ import { Activity, BadgeCheck, PhoneCall, ShieldCheck } from "lucide-react";
 import { CLINIC_SERVICES } from "../data/clinicContent";
 
 const QUICK_LINKS = [
-  { label: "Services", href: "#services" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Doctors", href: "#doctors" },
-  { label: "Locations", href: "#locations" },
-  { label: "Appointments & Pricing", href: "#faq" },
+  { label: "Chuyên khoa", href: "#services" },
+  { label: "Quy trình khám", href: "#how-it-works" },
+  { label: "Đội ngũ Bác sĩ", href: "#doctors" },
+  { label: "Cơ sở phòng khám", href: "#locations" },
+  { label: "Lịch hẹn & Bảng giá", href: "#faq" },
 ];
 
 export default function PatientFooter() {
@@ -26,8 +26,8 @@ export default function PatientFooter() {
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-500">
-              A modern, AI-informed clinic network focused on safe, accessible
-              and completely paperless patient care.
+              Mạng lưới phòng khám hiện đại, ứng dụng AI, tập trung vào chăm sóc
+              an toàn, dễ tiếp cận và bệnh án điện tử hoàn toàn không giấy.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600">
@@ -43,7 +43,7 @@ export default function PatientFooter() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold text-slate-900">Quick Links</h3>
+            <h3 className="text-sm font-semibold text-slate-900">Liên kết nhanh</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
               {QUICK_LINKS.map((link) => (
                 <li key={link.label}>
@@ -61,7 +61,7 @@ export default function PatientFooter() {
           {/* Services */}
           <div>
             <h3 className="text-sm font-semibold text-slate-900">
-              Clinical Services
+              Chuyên khoa khám
             </h3>
             <ul className="mt-4 space-y-2.5 text-sm text-slate-600">
               {CLINIC_SERVICES.map((service) => (
@@ -80,7 +80,7 @@ export default function PatientFooter() {
           {/* Emergency & Contact */}
           <div>
             <h3 className="text-sm font-semibold text-slate-900">
-              Emergency & Contact
+              Cấp cứu &amp; Liên hệ
             </h3>
             <ul className="mt-4 space-y-2.5">
               <li>
@@ -93,10 +93,11 @@ export default function PatientFooter() {
                 </a>
               </li>
               <li className="text-sm text-slate-500">
-                Mon - Sun: 07:30 - 20:30
+                T2 - CN: 07:30 - 20:30
               </li>
               <li className="text-sm text-slate-500">
-                Contactable by phone, portal chat, or in-person at any branch.
+                Liên hệ qua tổng đài, cổng bệnh nhân hoặc trực tiếp tại bất kỳ
+                cơ sở nào.
               </li>
             </ul>
           </div>
@@ -104,13 +105,14 @@ export default function PatientFooter() {
 
         <div className="mt-10 border-t border-slate-200 py-6">
           <p className="text-xs text-slate-500">
-            &copy; {new Date().getFullYear()} Smart Clinic Management System. All
-            rights reserved.
+            &copy; {new Date().getFullYear()} Hệ thống Quản lý Phòng khám Smart
+            Clinic. Bảo lưu mọi quyền.
           </p>
           <p className="mt-1 text-xs leading-relaxed text-slate-400">
-            Accredited clinic network &middot; Practice ID 12345 &middot; ISO
-            27001 certified infrastructure &middot; HL7 FHIR R4 interoperable.
-            For life-threatening emergencies, call 000.
+            Mạng lưới phòng khám được cấp phép &middot; Mã cơ sở KCB 12345
+            &middot; Hạ tầng đạt chuẩn bảo mật ISO 27001 &middot; Liên thông HL7
+            FHIR R4. Trường hợp khẩn cấp nguy hiểm tính mạng, vui lòng gọi cấp
+            cứu 115.
           </p>
         </div>
       </div>

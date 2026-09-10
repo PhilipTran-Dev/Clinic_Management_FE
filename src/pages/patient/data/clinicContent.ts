@@ -26,45 +26,45 @@ export interface Service {
 
 export const CLINIC_SERVICES: Service[] = [
   {
-    title: "Comprehensive Allergy Testing",
+    title: "Xét nghiệm Dị ứng Toàn diện",
     description:
-      "Evidence-based skin prick and patch testing for common environmental and food allergens. Results are reviewed same-day by a board-certified allergist.",
-    duration: "20-30 mins",
+      "Thực hiện test lẩy da (Prick test) và test áp da (Patch test) chẩn đoán dị ứng thức ăn, hóa chất, phấn hoa. Kết quả có trong ngày.",
+    duration: "20-30 phút",
     icon: Droplets,
   },
   {
-    title: "Respiratory & Asthma Management",
+    title: "Khám & Quản lý Hen suyễn - Hô hấp",
     description:
-      "Spirometry-based assessment and structured asthma action plans tailored to your triggers. Includes ongoing monitoring and medication reviews.",
-    duration: "15-20 mins",
+      "Đo chức năng hô hấp (Hô hấp ký Spirometry), lập kế hoạch kiểm soát cơn hen và phác đồ phòng ngừa tái phát.",
+    duration: "15-20 phút",
     icon: Wind,
   },
   {
-    title: "Pediatric Healthcare",
+    title: "Nhi khoa & Y học Gia đình",
     description:
-      "Gentle, family-centered care for infants and children, from developmental checks to allergy follow-ups. Minimally invasive sampling and clinical reassurance.",
-    duration: "20-30 mins",
+      "Thăm khám thân thiện, nhẹ nhàng cho trẻ sơ sinh và trẻ nhỏ. Tư vấn dinh dưỡng, tiêm chủng và sàng lọc dị ứng sớm.",
+    duration: "20-30 phút",
     icon: Baby,
   },
   {
-    title: "General Internal Medicine",
+    title: "Khám Nội Tổng quát & Tầm soát",
     description:
-      "Comprehensive adult consultations covering unexplained symptoms, chronic disease review, and preventive screening. Referrals coordinated across our network.",
-    duration: "15-30 mins",
+      "Khám chuyên sâu các bệnh lý nội khoa, tăng huyết áp, đái tháo đường, gan mật và phân loại sàng lọc trước điều trị.",
+    duration: "15-30 phút",
     icon: Stethoscope,
   },
   {
-    title: "Dermatology & Skin Allergy",
+    title: "Da liễu & Viêm da Cơ địa",
     description:
-      "Diagnosis and treatment of eczema, contact dermatitis, and urticaria with dermoscopic imaging. Personalized skincare and trigger-avoidance guidance.",
-    duration: "20 mins",
+      "Chẩn đoán mề đay mạn tính, chàm sữa, viêm da tiếp xúc bằng máy soi da Dermoscopy kỹ thuật số.",
+    duration: "20 phút",
     icon: Microscope,
   },
   {
-    title: "Preventive Health Screenings",
+    title: "Khám Sức khỏe Tổng quát Định kỳ",
     description:
-      "Annual health checks covering blood panels, cardiovascular risk, and lifestyle counselling. Results delivered digitally to your patient portal.",
-    duration: "30-45 mins",
+      "Gói xét nghiệm máu toàn diện, siêu âm ổ bụng, điện tim ECG và tư vấn bệnh án điện tử paperless.",
+    duration: "30-45 phút",
     icon: HeartPulse,
   },
 ];
@@ -78,22 +78,22 @@ export interface Metric {
 export const TRUST_METRICS: Metric[] = [
   {
     value: "4.9/5",
-    label: "Google Reviews & verified patient satisfaction",
+    label: "Đánh giá Google & mức hài lòng đã được xác minh từ bệnh nhân",
     icon: Star,
   },
   {
-    value: "15,000+",
-    label: "Outpatient consultations completed",
+    value: "15.000+",
+    label: "Lượt khám ngoại trú đã hoàn thành",
     icon: Users,
   },
   {
-    value: "5 Mins",
-    label: "Average door-to-doctor wait with Kiosk QR",
+    value: "5 Phút",
+    label: "Thời gian chờ trung bình từ Kiosk QR đến Bác sĩ",
     icon: Clock,
   },
   {
     value: "100%",
-    label: "Paperless electronic health records & e-prescriptions",
+    label: "Hồ sơ bệnh án điện tử & đơn thuốc điện tử không giấy",
     icon: FileText,
   },
 ];
@@ -106,21 +106,21 @@ export interface WorkflowStep {
 
 export const WORKFLOW_STEPS: WorkflowStep[] = [
   {
-    title: "Choose or Describe",
+    title: "Bước 1: Khai báo triệu chứng hoặc Chọn bác sĩ",
     description:
-      "Pick your specialist or let our assistant identify the right department from your symptoms.",
+      "Nhập triệu chứng (bằng giọng nói hoặc gõ chữ) để Trợ lý AI định hướng đúng chuyên khoa cần khám.",
     icon: MousePointerClick,
   },
   {
-    title: "Instant Booking Pass",
+    title: "Bước 2: Nhận Vé khám điện tử & Mã QR",
     description:
-      "Receive a clear SMS and QR code confirmation with your exact appointment window.",
+      "Nhận xác nhận lịch hẹn tức thì qua tin nhắn và mã QR cá nhân hiển thị trên màn hình.",
     icon: QrCode,
   },
   {
-    title: "5-Second Express Check-in",
+    title: "Bước 3: Check-in Kiosk 5 giây tại sảnh",
     description:
-      "Walk into our clinic, tap your QR code at the entrance kiosk, and head straight to your consultation room.",
+      "Quét mã QR tại máy Kiosk khi đến phòng khám để nhận số thứ tự tự động và vào thẳng phòng khám.",
     icon: ScanLine,
   },
 ];
@@ -133,13 +133,13 @@ export interface ClinicImage {
 
 export const HERO_CONSULTATION_IMAGE: ClinicImage = {
   url: "https://images.squarespace-cdn.com/content/v1/638de650c7378132a12e7c95/44b144e6-000e-4683-ad81-67a3aaf73089/TR4-5-min.jpg",
-  alt: "A warm, reassuring conversation between a senior doctor and a patient at the clinic.",
+  alt: "Cuộc trò chuyện ấm áp, đầy tin cậy giữa bác sĩ kỳ cựu và bệnh nhân tại phòng khám.",
   aspect: "aspect-[4/3]",
 };
 
 export const CLINIC_FACILITY_IMAGE: ClinicImage = {
   url: "https://www.albanyclinic.ca/wp-content/uploads/2024/10/albany-medical-clinic-walk-in-clinic.jpg",
-  alt: "Modern, clean and sterile medical facility with a walk-in reception area.",
+  alt: "Cơ sở y tế hiện đại, sạch sẽ với khu tiếp đón và văn phòng khám.",
   aspect: "aspect-[16/10]",
 };
 
@@ -165,164 +165,164 @@ export interface StaffMember {
 
 export const MEDICAL_STAFF: StaffMember[] = [
   {
-    id: "marcus-vance",
-    name: "Dr. Marcus Vance",
+    id: "tran-minh-tuan",
+    name: "PGS. TS. BS. Trần Minh Tuấn",
     role: "DOCTOR",
-    title: "Senior Consultant, Allergy & Immunology",
-    age: 48,
-    department: "Allergy & Clinical Immunology",
-    specialty: "Adult Anaphylaxis & Desensitization",
-    experienceYears: 18,
-    qualifications: ["MD", "FRACP"],
-    languages: ["English", "French"],
-    email: "dr.marcus.vance@smartclinic.com",
+    title: "Bác sĩ Cao cấp - Phó Giáo sư, Tiến sĩ Y khoa",
+    age: 52,
+    department: "Khoa Dị ứng & Miễn dịch lâm sàng",
+    specialty: "Hen phế quản, Dị ứng thuốc & Liệu pháp miễn dịch",
+    experienceYears: 24,
+    qualifications: ["PGS (Phó Giáo sư)", "TS (Tiến sĩ Y khoa)"],
+    languages: ["Tiếng Việt", "Tiếng Anh", "Tiếng Pháp"],
+    email: "tuan.tran@smartclinic.vn",
     phone: "+84 (028) 3900 1201",
-    extension: "Ext. 201",
-    roomNumber: "Suite 201 (Level 2)",
+    extension: "Máy lẻ 201",
+    roomNumber: "Phòng khám 201 (Tầng 2)",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBr682FWZs0BV7dL-JcrfD6AXLDzubmbjCQ4XEHJjcWhYDGbCtYEL8-os&s=10",
     availableToday: true,
-    bio: "Senior Consultant specializing in complex allergen immunotherapy, patch testing, and respiratory immunology.",
+    bio: "Chuyên gia đầu ngành về xét nghiệm lẩy da (Prick Test), dị ứng thời tiết và phác đồ giải mẫn cảm đặc hiệu.",
   },
   {
-    id: "muzammil-ahmed",
-    name: "Dr. Muzammil Ahmed",
+    id: "nguyen-van-dung",
+    name: "BS. CKI. Nguyễn Văn Dũng",
     role: "DOCTOR",
-    title: "Consultant Physician, Internal Medicine",
-    age: 42,
-    department: "General Internal Medicine",
-    specialty: "Preventive Medicine & Diagnostic Triage",
-    experienceYears: 14,
-    qualifications: ["MBBS", "MD"],
-    languages: ["English", "Hindi", "Urdu"],
-    email: "dr.ahmed.muzammil@smartclinic.com",
+    title: "Bác sĩ Chuyên khoa I",
+    age: 44,
+    department: "Khoa Nội Tổng quát",
+    specialty: "Nội tim mạch & Tầm soát bệnh lý chuyển hóa",
+    experienceYears: 16,
+    qualifications: ["CKI (Chuyên khoa I)"],
+    languages: ["Tiếng Việt", "Tiếng Anh"],
+    email: "dung.nguyen@smartclinic.vn",
     phone: "+84 (028) 3900 1104",
-    extension: "Ext. 104",
-    roomNumber: "Suite 104 (Level 1)",
+    extension: "Máy lẻ 104",
+    roomNumber: "Phòng khám 104 (Tầng 1)",
     imageUrl:
       "https://content.jdmagicbox.com/v2/comp/hyderabad/m7/040pxx40.xx40.221119220243.t2m7/catalogue/health-care-clinic-dr-muzammil-ahmed-santosh-nagar-hyderabad-clinics-q70ci2fawq.jpg",
     availableToday: true,
-    bio: "Board-certified physician dedicated to outpatient diagnostic triage, chronic disorder stabilization, and metabolic care.",
+    bio: "Hơn 15 năm kinh nghiệm điều trị tăng huyết áp, đái tháo đường và sàng lọc phân luồng bệnh nhân ngoại trú.",
   },
   {
-    id: "elena-rostova",
-    name: "Dr. Elena Rostova",
+    id: "le-thi-hoang-yen",
+    name: "ThS. BS. Lê Thị Hoàng Yến",
     role: "DOCTOR",
-    title: "Consultant ENT Surgeon",
-    age: 45,
-    department: "Ear, Nose & Throat (ENT)",
-    specialty: "Rhinology, Sinus Surgery & Airway Care",
-    experienceYears: 16,
-    qualifications: ["MD", "PhD"],
-    languages: ["English", "Russian"],
-    email: "dr.elena.rostova@smartclinic.com",
+    title: "Thạc sĩ, Bác sĩ Chuyên khoa Tai - Mũi - Họng",
+    age: 41,
+    department: "Khoa Tai - Mũi - Họng",
+    specialty: "Viêm xoang dị ứng, Nội soi thanh quản & Tai mũi họng trẻ em",
+    experienceYears: 15,
+    qualifications: ["ThS (Thạc sĩ Y khoa)"],
+    languages: ["Tiếng Việt", "Tiếng Nga"],
+    email: "yen.le@smartclinic.vn",
     phone: "+84 (028) 3900 1205",
-    extension: "Ext. 205",
-    roomNumber: "Suite 205 (Level 2)",
+    extension: "Máy lẻ 205",
+    roomNumber: "Phòng khám 205 (Tầng 2)",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_5QbsbX2YbWKJgZlFJhxs8qOjEw1FrCdCepjQi-sHvwrV4KesoqxqIIA&s=10",
     availableToday: true,
-    bio: "ENT specialist with extensive clinical research in allergic rhinitis, vocal health, and minimally invasive nasal treatments.",
+    bio: "Bác sĩ điều trị chuyên sâu về viêm mũi dị ứng mạn tính, polyp mũi và các bệnh lý đường hô hấp trên.",
   },
   {
-    id: "julian-chen",
-    name: "Dr. Julian Chen",
+    id: "pham-quoc-bao",
+    name: "BS. Phạm Quốc Bảo",
     role: "DOCTOR",
-    title: "Consultant Pediatrician",
-    age: 39,
-    department: "Pediatrics & Family Medicine",
-    specialty: "Pediatric Asthma & Food Allergy Screening",
-    experienceYears: 11,
-    qualifications: ["BMed", "FRACGP"],
-    languages: ["English", "Mandarin"],
-    email: "dr.julian.chen@smartclinic.com",
+    title: "Bác sĩ Chuyên khoa Nhi",
+    age: 38,
+    department: "Khoa Nhi & Y học Gia đình",
+    specialty: "Dị ứng đạm sữa bò & Hô hấp nhi khoa",
+    experienceYears: 12,
+    qualifications: ["BS (Bác sĩ Y khoa)"],
+    languages: ["Tiếng Việt", "Tiếng Anh"],
+    email: "bao.pham@smartclinic.vn",
     phone: "+84 (028) 3900 1108",
-    extension: "Ext. 108",
-    roomNumber: "Suite 108 (Level 1)",
+    extension: "Máy lẻ 108",
+    roomNumber: "Phòng khám 108 (Tầng 1)",
     imageUrl:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuCAPQj7GqGxzxy5XysDPR2WuiS7o1U_WR7dIzgAFYppclhcDcEjpO0qc&s=10",
     availableToday: true,
-    bio: "Empathetic pediatrician focused on gentle childhood allergy assessment, early respiratory support, and family health education.",
+    bio: "Tận tâm trong thăm khám nhẹ nhàng cho trẻ sơ sinh, tư vấn dinh dưỡng và xử lý viêm phế quản co thắt ở trẻ.",
   },
   {
-    id: "sarah-jenkins",
-    name: "Sarah Jenkins",
+    id: "trinh-thu-hang",
+    name: "ĐD. Trịnh Thu Hằng, CNĐD",
     role: "NURSE",
-    title: "Lead Triage Nurse",
-    age: 36,
-    department: "Outpatient Clinical Diagnostics",
-    specialty: "Lead Triage Nurse & Allergy Testing Coordinator",
-    experienceYears: 12,
-    qualifications: ["BSN", "RN"],
-    languages: ["English"],
-    email: "nurse.sarah.jenkins@smartclinic.com",
+    title: "Điều dưỡng Trưởng",
+    age: 37,
+    department: "Khối Chẩn đoán & Thăm dò chức năng",
+    specialty: "Phụ trách Test lẩy da dị ứng & Phân luồng tiếp đón",
+    experienceYears: 14,
+    qualifications: ["CNĐD (Cử nhân Điều dưỡng)"],
+    languages: ["Tiếng Việt"],
+    email: "hang.trinh@smartclinic.vn",
     phone: "+84 (028) 3900 1011",
-    extension: "Ext. 111",
-    roomNumber: "Triage Station A (Level 1)",
+    extension: "Máy lẻ 111",
+    roomNumber: "Trạm Điều dưỡng A (Tầng 1)",
     imageUrl:
       "https://cdn.prod.website-files.com/5babc11099f97ea5dbcf24d5/674e02bfb70719d29df790c2_clinic-nurse.jpg",
     availableToday: true,
-    bio: "Supervises the intradermal allergy diagnostic wing, pre-consultation vitals monitoring, and emergency response readiness.",
+    bio: "Phụ trách quy trình an toàn tiêm dị nguyên, đo dấu hiệu sinh tồn và hướng dẫn bệnh nhân trước khi vào khám.",
   },
   {
-    id: "emily-rodriguez",
-    name: "Emily Rodriguez",
+    id: "do-phuong-mai",
+    name: "ĐD. Đỗ Phương Mai",
     role: "NURSE",
-    title: "Registered Nurse",
-    age: 31,
-    department: "Pediatric Care",
-    specialty: "Pediatric Comfort & Vaccination Coordination",
-    experienceYears: 8,
-    qualifications: ["RN"],
-    languages: ["English", "Spanish"],
-    email: "nurse.emily.rodriguez@smartclinic.com",
+    title: "Cử nhân Điều dưỡng Nhi khoa",
+    age: 29,
+    department: "Phòng Tiêm chủng & Chăm sóc Nhi",
+    specialty: "Kỹ thuật tiêm không đau & Hỗ trợ khám Nhi",
+    experienceYears: 6,
+    qualifications: ["CNĐD (Cử nhân Điều dưỡng)"],
+    languages: ["Tiếng Việt"],
+    email: "mai.do@smartclinic.vn",
     phone: "+84 (028) 3900 1012",
-    extension: "Ext. 112",
-    roomNumber: "Pediatric Care Bay (Level 1)",
+    extension: "Máy lẻ 112",
+    roomNumber: "Khu Chăm sóc Nhi (Tầng 1)",
     imageUrl:
       "https://eaglegatecollege.edu/wp-content/uploads/2023/09/shutterstock_2279543395-scaled.jpg",
     availableToday: true,
-    bio: "Dedicated to soothing clinical care for infants, pediatric allergy patch preparation, and family guidance.",
+    bio: "Chuyên viên chăm sóc dịu dàng cho các bệnh nhi, hỗ trợ dán test áp da và theo dõi phản ứng sau tiêm.",
   },
   {
-    id: "amina-patel",
-    name: "Amina Patel",
+    id: "nguyen-thao-ly",
+    name: "ĐD. Nguyễn Thảo Ly",
     role: "NURSE",
-    title: "Infusion Treatment Nurse",
-    age: 33,
-    department: "Ambulatory & Infusion Wing",
-    specialty: "Immunotherapy Injection & Biologics Monitoring",
-    experienceYears: 9,
-    qualifications: ["BSN"],
-    languages: ["English", "Gujarati"],
-    email: "nurse.amina.patel@smartclinic.com",
+    title: "Cử nhân Điều dưỡng Hồi sức",
+    age: 32,
+    department: "Phòng Điều trị & Truyền thuốc trong ngày",
+    specialty: "Theo dõi truyền dịch sinh học & Giải mẫn cảm",
+    experienceYears: 8,
+    qualifications: ["CNĐD (Cử nhân Điều dưỡng)"],
+    languages: ["Tiếng Việt"],
+    email: "ly.nguyen@smartclinic.vn",
     phone: "+84 (028) 3900 1013",
-    extension: "Ext. 113",
-    roomNumber: "Treatment Room 3 (Level 2)",
+    extension: "Máy lẻ 113",
+    roomNumber: "Phòng Thủ thuật 3 (Tầng 2)",
     imageUrl:
       "https://xpresshealth.co.uk/_next/image?url=https%3A%2F%2Fbackend.xpresshealth.co.uk%2Fuploads%2F2025%2F04%2F513-min.jpg&w=1920&q=100",
     availableToday: true,
-    bio: "Administers targeted desensitization injections, sublingual drops, and monitors patient post-treatment recovery.",
+    bio: "Giám sát liệu trình nhỏ giọt dưới lưỡi, tiêm vắc xin dị nguyên và sơ cứu phản vệ ngoại viện.",
   },
   {
-    id: "zainab-okafor",
-    name: "Zainab Okafor",
+    id: "tran-kim-oanh",
+    name: "ĐD. Trần Kim Oanh",
     role: "NURSE",
-    title: "Intake Coordinator Nurse",
-    age: 37,
-    department: "Express Intake & Kiosk Navigation",
-    specialty: "Rapid Triage Assessment & Patient Support",
-    experienceYears: 13,
-    qualifications: ["RN", "MSN"],
-    languages: ["English"],
-    email: "nurse.zainab.okafor@smartclinic.com",
+    title: "Điều dưỡng Điều phối Kiosk",
+    age: 35,
+    department: "Quầy Tiếp đón & Phân luồng Cấp cứu",
+    specialty: "Hỗ trợ quét BHYT, Kiosk & Sàng lọc ban đầu",
+    experienceYears: 11,
+    qualifications: ["ĐD (Điều dưỡng)"],
+    languages: ["Tiếng Việt"],
+    email: "oanh.tran@smartclinic.vn",
     phone: "+84 (028) 3900 1014",
-    extension: "Ext. 114",
-    roomNumber: "Welcome Kiosk Hub (Ground Floor)",
+    extension: "Máy lẻ 114",
+    roomNumber: "Quầy Điều phối Kiosk (Tầng Trệt)",
     imageUrl:
       "https://media.istockphoto.com/id/2187596982/photo/portrait-of-smiling-african-woman-nurse.jpg?s=612x612&w=0&k=20&c=OC0idN57sR1dpEOCIaBX9ger5rJk9tl5hK7HX-xM8nA=",
     availableToday: true,
-    bio: "Assists incoming walk-ins and seniors with kiosk check-in, preliminary vitals, and electronic medical intake.",
+    bio: "Hướng dẫn bệnh nhân lớn tuổi lấy số tự động, đối soát thẻ BHYT và hỗ trợ người bệnh khuyết tật.",
   },
 ];
 
@@ -342,25 +342,37 @@ export interface ClinicLocation {
 
 export const CLINIC_LOCATIONS: ClinicLocation[] = [
   {
-    name: "Adelaide Central",
-    address: "12 Rundle Street, Adelaide SA 5000, Australia",
-    phone: "1800 111 222",
-    waitTime: "~8 mins",
-    hours: "Mon - Sun: 07:30 - 20:30",
+    name: "Cơ sở 1 - Trung tâm Cầu Giấy (Hà Nội)",
+    address: "Tòa nhà SmartClinic, 88 Hoàng Đạo Thúy, Cầu Giấy, Hà Nội",
+    phone: "(024) 3900 8888",
+    waitTime: "~6 phút",
+    hours: "Thứ 2 - Chủ Nhật: 07:30 - 20:30 (Khám cả trưa)",
     transit: [
-      { icon: Car, text: "Free onsite parking at rear entrance" },
-      { icon: Bus, text: "5 min walk from Adelaide Central Bus Interchange" },
+      {
+        icon: Car,
+        text: "Hầm đỗ xe ô tô & xe máy rộng rãi, vào từ ngõ 88 Hoàng Đạo Thúy",
+      },
+      {
+        icon: Bus,
+        text: "Tuyến xe buýt 29, 30, 60B đỗ ngay cổng phòng khám",
+      },
     ],
   },
   {
-    name: "Hanoi Campus",
-    address: "88 Hoang Dao Thuy, Cau Giay, Hanoi, Vietnam",
-    phone: "1800 111 333",
-    waitTime: "~12 mins",
-    hours: "Mon - Sun: 07:30 - 20:30",
+    name: "Cơ sở 2 - Trung tâm Quận 1 (TP. Hồ Chí Minh)",
+    address: "120 Hai Bà Trưng, Phường Đa Kao, Quận 1, TP. Hồ Chí Minh",
+    phone: "(028) 3900 9999",
+    waitTime: "~8 phút",
+    hours: "Thứ 2 - Chủ Nhật: 07:30 - 20:30 (Khám cả trưa)",
     transit: [
-      { icon: Car, text: "Basement parking, entry via Hoang Dao Thuy lane" },
-      { icon: Bus, text: "Direct bus lines 07, 24, 34 stop at the campus gate" },
+      {
+        icon: Car,
+        text: "Bãi đỗ xe máy miễn phí phía sau tòa nhà",
+      },
+      {
+        icon: Bus,
+        text: "Gần trạm xe buýt Công viên Lê Văn Tám (cách 100m)",
+      },
     ],
   },
 ];
@@ -370,25 +382,42 @@ export interface Faq {
   answer: string;
 }
 
+export function resolveDoctorForService(serviceTitle: string): StaffMember {
+  const title = serviceTitle.toLowerCase();
+  const match = MEDICAL_STAFF.find((staff) => {
+    const haystack = `${staff.department} ${staff.title}`.toLowerCase();
+    if (title.includes("nhi khoa") || title.includes("y học gia đình"))
+      return haystack.includes("nhi");
+    if (title.includes("nội tổng quát") || title.includes("sức khỏe tổng quát"))
+      return haystack.includes("nội tổng quát");
+    if (title.includes("hô hấp") || title.includes("hen suyễn"))
+      return haystack.includes("dị ứng");
+    if (title.includes("dị ứng") || title.includes("da liễu"))
+      return haystack.includes("dị ứng");
+    return false;
+  });
+  return match ?? MEDICAL_STAFF[0];
+}
+
 export const FAQS: Faq[] = [
   {
-    question: "How does the AI symptom checker protect my personal medical data?",
+    question: "Dữ liệu y tế và triệu chứng của tôi có được bảo mật không?",
     answer:
-      "All inputs are encrypted in transit and at rest on ISO 27001 certified infrastructure. Data is pseudonymized before analysis, never sold, and retained only as long as required by clinical and regulatory obligations.",
+      "Mọi thông tin sức khỏe được mã hóa theo tiêu chuẩn bảo mật y tế ISO 27001 và liên thông chuẩn HL7 FHIR. Chúng tôi cam kết tuyệt đối không chia sẻ dữ liệu cho bên thứ ba.",
   },
   {
-    question: "Can I cancel or reschedule my appointment?",
+    question: "Phòng khám có áp dụng Bảo hiểm Y tế (BHYT) nhà nước không?",
     answer:
-      "Yes. Appointments can be rescheduled or cancelled free of charge up to 4 hours before the start time directly from the patient portal or by calling the clinic line.",
+      "Có. Phòng khám liên thông dữ liệu BHYT toàn quốc. Bệnh nhân có thể quét thẻ BHYT trên ứng dụng hoặc tại quầy tiếp đón để được hưởng mức chi trả theo đúng quy định của Bộ Y tế.",
   },
   {
-    question: "What payment methods are supported at the clinic?",
+    question: "Tôi có thể hủy hoặc đổi giờ hẹn khám không?",
     answer:
-      "We accept VietQR and VNPay, all major credit and debit cards, and cash at our reception counters. e-Prescriptions are issued paperlessly where supported.",
+      "Bệnh nhân có thể đổi hoặc hủy lịch hẹn hoàn toàn miễn phí trước giờ khám 2 tiếng qua Cổng bệnh nhân hoặc gọi trực tiếp đến tổng đài 1900 123 456.",
   },
   {
-    question: "Do I need a doctor's referral letter?",
+    question: "Phòng khám hỗ trợ những hình thức thanh toán nào?",
     answer:
-      "Not for most consultations. Some specialist allergy panels and insurer-reimbursed procedures may request a referral; our team will confirm this during booking.",
+      "Hỗ trợ chuyển khoản quét mã VietQR tự động, thanh toán qua cổng VNPay, thẻ tín dụng/ghi nợ (Visa, Master) và tiền mặt tại quầy viện phí.",
   },
 ];

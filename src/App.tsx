@@ -5,6 +5,8 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import PatientLandingPage from "./pages/patient/PatientLandingPage";
 import BookingPage from "./pages/patient/BookingPage";
+import PatientDashboardPage from "./pages/patient/PatientDashboardPage";
+import DoctorEHRPage from "./pages/doctor/DoctorEHRPage";
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -51,7 +53,7 @@ export default function App() {
         path="/patient/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardPlaceholder />
+            <PatientDashboardPage />
           </ProtectedRoute>
         }
       />
@@ -59,7 +61,7 @@ export default function App() {
         path="/doctor/ehr"
         element={
           <ProtectedRoute>
-            <DashboardPlaceholder />
+            <DoctorEHRPage />
           </ProtectedRoute>
         }
       />

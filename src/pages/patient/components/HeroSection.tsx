@@ -10,18 +10,18 @@ export default function HeroSection() {
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 shadow-card">
             <ShieldCheck className="h-4 w-4 shrink-0 text-clinical-600" />
-            Official Partner of National Health Interoperability &middot; HL7
-            FHIR Standard
+            Chứng nhận Tiêu chuẩn Liên thông Y tế HL7 FHIR &bull; Bảo mật ISO
+            27001
           </span>
 
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl">
-            Compassionate Medical Care,{" "}
-            <span className="text-clinical-600">Zero Waiting Lines.</span>
+            Khám Chữa Bệnh Tận Tâm,{" "}
+            <span className="text-clinical-600">Không Cần Chờ Đợi.</span>
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600">
-            Book a guaranteed consultation with our senior specialists in under
-            2 minutes, or check in at our modern walk-in clinic.
+            Đặt lịch hẹn với các Bác sĩ chuyên khoa đầu ngành chỉ trong 2 phút.
+            Check-in tự động 5 giây tại Kiosk thông minh.
           </p>
 
           <div className="mt-8">
@@ -30,20 +30,20 @@ export default function HeroSection() {
               className="inline-flex h-14 items-center justify-center rounded-xl bg-cta px-8 text-lg font-semibold text-white shadow-md transition-all hover:bg-cta-hover"
             >
               <Calendar className="mr-2 h-5 w-5" />
-              Book an Appointment
+              Đặt lịch khám ngay
             </Link>
             <p className="mt-3 text-sm text-slate-500">
-              Quick 2-minute booking &middot; No upfront payment required
-              &middot; Walk-ins welcome
+              Không cần thanh toán trước &middot; Tiếp nhận cả bệnh nhân vãng
+              lai
             </p>
           </div>
 
           <a
-            href="tel:028 1900 0000"
+            href="tel:028 3900 9999"
             className="mt-6 inline-flex items-center gap-2 text-base font-medium text-slate-600 transition-colors hover:text-clinical-700"
           >
             <PhoneCall className="h-5 w-5 text-clinical-600" />
-            Emergency &amp; Assistance: (028) 1900-xxxx
+            Đường dây nóng hỗ trợ khẩn cấp: (028) 3900 9999
           </a>
         </div>
 
@@ -64,9 +64,9 @@ export default function HeroSection() {
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-triage-p3" />
               </span>
               <span className="text-sm font-semibold text-slate-900">
-                Active Walk-in Queue:{" "}
+                Đang tiếp đón:{" "}
                 <span className="font-medium text-slate-600">
-                  ~5 mins wait time
+                  ~5 phút chờ
                 </span>
               </span>
             </div>
