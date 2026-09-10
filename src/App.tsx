@@ -7,6 +7,7 @@ import PatientLandingPage from "./pages/patient/PatientLandingPage";
 import BookingPage from "./pages/patient/BookingPage";
 import PatientDashboardPage from "./pages/patient/PatientDashboardPage";
 import DoctorEHRPage from "./pages/doctor/DoctorEHRPage";
+import PharmacyPage from "./pages/pharmacy/PharmacyPage";
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -69,7 +70,7 @@ export default function App() {
         path="/pharmacy/queue"
         element={
           <ProtectedRoute>
-            <DashboardPlaceholder />
+            <PharmacyPage />
           </ProtectedRoute>
         }
       />
