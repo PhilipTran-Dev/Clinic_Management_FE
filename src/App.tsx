@@ -8,6 +8,7 @@ import BookingPage from "./pages/patient/BookingPage";
 import PatientDashboardPage from "./pages/patient/PatientDashboardPage";
 import DoctorEHRPage from "./pages/doctor/DoctorEHRPage";
 import PharmacyPage from "./pages/pharmacy/PharmacyPage";
+import KioskPage from "./pages/kiosk/KioskPage";
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -44,6 +45,8 @@ export default function App() {
     <Routes>
       <Route path="/" element={<PatientLandingPage />} />
       <Route path="/patient/booking" element={<BookingPage />} />
+      <Route path="/kiosk" element={<KioskPage />} />
+      <Route path="/kios" element={<KioskPage />} />
 
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
